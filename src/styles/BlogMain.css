@@ -1,0 +1,24 @@
+.blogmainimg{
+    height: 500px;
+    width: 800px;
+}
+
+
+.mainBlogdiv{
+display: flex;
+justify-content: center;
+}
+
+.mainPostHeading{
+    color: blue;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+
+.content{
+    width: 800px;
+    color: blue;
+    font-size: 1rem;
+    text-align: justify;
+}
