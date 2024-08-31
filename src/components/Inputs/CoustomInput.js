@@ -1,14 +1,14 @@
 
 ////////////////////////////////////////////
 import React, { useRef, useEffect } from "react";
-import CommandImg from '../Assets/icons/code.svg'
-import Link from '../Assets/icons/copy.svg'
-import H1 from '../Assets/icons/h1.svg'
-import H2 from '../Assets/icons/h2.svg'
-import Image from '../Assets/icons/image.svg'
-import '../styles/Takepost.css'
+import CommandImg from '../../Assets/icons/code.svg'
+import Link from '../../Assets/icons/copy.svg'
+import H1 from '../../Assets/icons/h1.svg'
+import H2 from '../../Assets/icons/h2.svg'
+import Image from '../../Assets/icons/image.svg'
+import '../../styles/Takepost.css'
 
-function CustomInput() {
+function CustomInput({setShowsecond}) {
   const contentEditableRef = useRef(null);
 
   const focusAndPlaceCursor = () => {
@@ -27,53 +27,6 @@ function CustomInput() {
   useEffect(() => {
     focusAndPlaceCursor();
   }, []);
-
-  // const addStyledInputBox = (style, placeholder) => {
-  //   const inputWrapper = document.createElement("div");
-  //   inputWrapper.setAttribute("contentEditable", "false");
-  //   inputWrapper.style.marginBottom = "10px";
-  //   inputWrapper.style.paddingRight = "10px";
-  //   inputWrapper.style.width = "95%";
-
-  //   Object.assign(inputWrapper.style, style.wrapperStyle);
-
-  //   const inputElement = document.createElement("input");
-  //   inputElement.setAttribute("type", "text");
-  //   inputElement.setAttribute("placeholder", placeholder);
-  //   Object.assign(inputElement.style, style.inputStyle);
-
-  //   const removeButton = document.createElement("button");
-  //   removeButton.textContent = "x";
-  //   removeButton.onclick = () => inputWrapper.remove();
-
-  //   Object.assign(removeButton.style, {
-  //     backgroundColor: "transparent",
-  //     border: "none",
-  //     color: "red",
-  //     fontSize: "16px",
-  //     cursor: "pointer",
-  //     padding: "0",
-  //     marginLeft: "5px",
-  //   });
-
-  //   inputWrapper.appendChild(inputElement);
-  //   inputWrapper.appendChild(removeButton);
-
-  //   const contentDiv = contentEditableRef.current;
-  //   if (contentDiv) {
-  //     const br = document.createElement("br");
-  //     contentDiv.appendChild(inputWrapper);
-  //     contentDiv.appendChild(br);
-  //     contentDiv.focus();
-  //     const range = document.createRange();
-  //     const selection = window.getSelection();
-  //     range.setStartAfter(inputWrapper);
-  //     range.collapse(true);
-  //     selection.removeAllRanges();
-  //     selection.addRange(range);
-  //   }
-  // };
-
 
   const addStyledInputBox = (style, placeholder, type) => {
     const inputWrapper = document.createElement("div");
@@ -259,169 +212,55 @@ const addLinkInputBox = () =>
       "Add Subheading",
       "Subheading"
     );
-
-
-
-    // const getDocumentContent = () => {
+    // const collectDocumentContent = () => {
     //   const contentDiv = contentEditableRef.current;
-    //   if (!contentDiv) return null;
+    //   if (!contentDiv) return [];
     
     //   const documentContent = [];
     
-    //   // Iterate through the child nodes of the content div
-    //   contentDiv.childNodes.forEach(node => {
-    //     if (node.nodeType === Node.ELEMENT_NODE) {
-    //       const type = node.getAttribute('data-type');
+    //   const children = contentDiv.childNodes;
     
-    //       if (type) {
-    //         if (type === 'image') {
-    //           // Handle image inputs
-    //           const fileInput = node.querySelector('input[type="file"]');
-    //           if (fileInput && fileInput.files.length > 0) {
-    //             const file = fileInput.files[0];
-    //             // TODO: Upload the file to a server or convert it to a base64 string as needed
-    //             // For demonstration, we'll use the file name
-    //             documentContent.push({
-    //               text: file.name,
-    //               type: "image"
-    //             });
-    //           }
-    //         } else {
-    //           // Handle other input types (text-based)
-    //           const input = node.querySelector('input[type="text"]');
-    //           if (input) {
-    //             const text = input.value.trim();
-    //             if (text) {
-    //               documentContent.push({
-    //                 text: text,
-    //                 type: type
-    //               });
-    //             }
-    //           }
-    //         }
-    //       } else {
-    //         // Handle plain text within <p> tags or direct text nodes
-    //         if (node.nodeName === 'P') {
-    //           const text = node.innerText.trim();
-    //           if (text) {
-    //             documentContent.push({
-    //               text: text,
-    //               type: "text"
-    //             });
-    //           }
-    //         } else if (node.nodeName === 'BR') {
-    //           // Ignore <br> tags
-    //         } else {
-    //           // Handle any other element types as plain text
-    //           const text = node.innerText.trim();
-    //           if (text) {
-    //             documentContent.push({
-    //               text: text,
-    //               type: "text"
-    //             });
-    //           }
-    //         }
-    //       }
-    //     } else if (node.nodeType === Node.TEXT_NODE) {
-    //       const text = node.textContent.trim();
+    //   children.forEach((child) => {
+    //     if (child.nodeType === Node.TEXT_NODE) {
+    //       // Capture plain text nodes
+    //       const text = child.textContent.trim();
     //       if (text) {
     //         documentContent.push({
     //           text: text,
-    //           type: "text"
+    //           type: "text",
     //         });
     //       }
-    //     }
-    //   });
-    
-    //   return { documentContent };
-    // };
-
-    
-    // const collectDocumentContent = () => {
-    //   const contentDiv = contentEditableRef.current;
-    //   if (!contentDiv) return [];
-    
-    //   const documentContent = [];
-    //   const children = contentDiv.children;
-    
-    //   Array.from(children).forEach((child) => {
-    //     if (child.nodeName === "DIV") {
-    //       const inputElement = child.querySelector("input[type='text'], input[type='file']");
-    //       if (inputElement) {
-    //         const placeholder = inputElement.getAttribute("placeholder");
-    //         let type = "text";
-    //         if (placeholder === "Add Heading") {
-    //           type = "heading";
-    //         } else if (placeholder === "Add Subheading") {
-    //           type = "subheading";
-    //         } else if (placeholder === "Add Command") {
-    //           type = "code";
-    //         } else if (inputElement.type === "file") {
-    //           const file = inputElement.files[0];
-    //           if (file) {
-    //             documentContent.push({
-    //               type: "file",
-    //               file, // include the file object
-    //               name: file.name, // file name for reference
-    //             });
+    //     } else if (child.nodeType === Node.ELEMENT_NODE) {
+    //       if (child.nodeName === "DIV") {
+    //         const inputElement = child.querySelector("input[type='text'], input[type='file']");
+    //         if (inputElement) {
+    //           const placeholder = inputElement.getAttribute("placeholder");
+    //           let type = "text";
+    //           if (placeholder === "Add Heading") {
+    //             type = "heading";
+    //           } else if (placeholder === "Add Subheading") {
+    //             type = "subheading";
+    //           } else if (placeholder === "Add Command") {
+    //             type = "code";
+    //           } 
+    //           else if (placeholder === "Add Link") {
+    //             type = "link";
+    //           }else if (inputElement.type === "file") {
+    //             const file = inputElement.files[0];
+    //             if (file) {
+    //               documentContent.push({
+    //                 type: "file",
+    //                 file, // include the file object
+    //                 name: file.name, // file name for reference
+    //               });
+    //             }
+    //             return; // Skip adding text info for the file input
     //           }
-    //           return; // Skip adding text info for the file input
+    //           documentContent.push({
+    //             text: inputElement.value || placeholder,
+    //             type,
+    //           });
     //         }
-    //         documentContent.push({
-    //           text: inputElement.value || placeholder,
-    //           type,
-    //         });
-    //       }
-    //     }
-    //   });
-    
-    //   return documentContent;
-    // };
-
-    // const collectDocumentContent = () => {
-    //   const contentDiv = contentEditableRef.current;
-    //   if (!contentDiv) return [];
-    
-    //   const documentContent = [];
-    
-    //   // Capture plain text from the content-editable div
-    //   const plainText = contentDiv.innerText.trim();
-    //   if (plainText) {
-    //     documentContent.push({
-    //       text: plainText,
-    //       type: "text",
-    //     });
-    //   }
-    
-    //   // Iterate over dynamic input boxes
-    //   const children = contentDiv.children;
-    //   Array.from(children).forEach((child) => {
-    //     if (child.nodeName === "DIV") {
-    //       const inputElement = child.querySelector("input[type='text'], input[type='file']");
-    //       if (inputElement) {
-    //         const placeholder = inputElement.getAttribute("placeholder");
-    //         let type = "text";
-    //         if (placeholder === "Add Heading") {
-    //           type = "heading";
-    //         } else if (placeholder === "Add Subheading") {
-    //           type = "subheading";
-    //         } else if (placeholder === "Add Command") {
-    //           type = "code";
-    //         } else if (inputElement.type === "file") {
-    //           const file = inputElement.files[0];
-    //           if (file) {
-    //             documentContent.push({
-    //               type: "file",
-    //               file, // include the file object
-    //               name: file.name, // file name for reference
-    //             });
-    //           }
-    //           return; // Skip adding text info for the file input
-    //         }
-    //         documentContent.push({
-    //           text: inputElement.value || placeholder,
-    //           type,
-    //         });
     //       }
     //     }
     //   });
@@ -429,15 +268,16 @@ const addLinkInputBox = () =>
     //   return documentContent;
     // };
     
+
 
     const collectDocumentContent = () => {
       const contentDiv = contentEditableRef.current;
       if (!contentDiv) return [];
-    
+      
       const documentContent = [];
-    
+      
       const children = contentDiv.childNodes;
-    
+      
       children.forEach((child) => {
         if (child.nodeType === Node.TEXT_NODE) {
           // Capture plain text nodes
@@ -453,13 +293,17 @@ const addLinkInputBox = () =>
             const inputElement = child.querySelector("input[type='text'], input[type='file']");
             if (inputElement) {
               const placeholder = inputElement.getAttribute("placeholder");
+              const dataType = child.getAttribute("data-type"); // Get the data-type attribute
+    
               let type = "text";
-              if (placeholder === "Add Heading") {
+              if (dataType === "heading") {
                 type = "heading";
-              } else if (placeholder === "Add Subheading") {
+              } else if (dataType === "subheading") {
                 type = "subheading";
-              } else if (placeholder === "Add Command") {
+              } else if (dataType === "code") {
                 type = "code";
+              } else if (dataType === "link") {
+                type = "link"; // Add this line to handle link inputs
               } else if (inputElement.type === "file") {
                 const file = inputElement.files[0];
                 if (file) {
@@ -471,15 +315,23 @@ const addLinkInputBox = () =>
                 }
                 return; // Skip adding text info for the file input
               }
-              documentContent.push({
-                text: inputElement.value || placeholder,
-                type,
-              });
+              
+              if (type === "link") {
+                documentContent.push({
+                  text: inputElement.value || placeholder,
+                  type: "link", // Specify the type as link
+                });
+              } else {
+                documentContent.push({
+                  text: inputElement.value || placeholder,
+                  type,
+                });
+              }
             }
           }
         }
       });
-    
+      
       return documentContent;
     };
     
@@ -497,7 +349,7 @@ const addLinkInputBox = () =>
         }
       });
       // Example API call
-      fetch("http://192.168.1.15:5000/upload", {
+      fetch("http://localhost:5000/upload", {
         method: "POST",
         body: formData,
       })
@@ -550,7 +402,9 @@ const addLinkInputBox = () =>
         <p></p>
       </div>
 
-      <button onClick={()=>{console.log(handleSave())}}> LOG DATA</button>
+      {/* <button > LOG DATA</button> */}
+      <div className='PublsiBtn' onClick={()=>{console.log(handleSave())}}>Publish Post
+      </div>
     </div>
   );
 }

@@ -17,18 +17,26 @@
 // }
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import '../../styles/Takepost.css';
-import CoustomInput from '../CoustomInput';
+import CoustomInput from './CoustomInput';
 
 export default function Takepost() {
+  const [showsecond,setShowsecond]= useState(false)
   return (
     <div className='mainDivPost'>
       <div className='innerDiv'> 
       <h1 style={{ color: 'blue',}}>Create new Post</h1>
-      <CoustomInput />
-      <div className='PublsiBtn'>Publish Post
-      </div>
+
+      {
+        !showsecond ?
+        <CoustomInput setShowsecond={setShowsecond }/>
+        :
+        <div style={{color:'white'}}> Additional Input </div>
+
+      }
+      {/* <div className='PublsiBtn'>Publish Post
+      </div> */}
       {/* <div className='MainPostinputBox'>
         <div className="input-field">
 
