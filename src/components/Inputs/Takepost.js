@@ -35,41 +35,6 @@ export default function Takepost() {
         <div style={{color:'white'}}> Additional Input </div>
 
       }
-      {/* <div className='PublsiBtn'>Publish Post
-      </div> */}
-      {/* <div className='MainPostinputBox'>
-        <div className="input-field">
-
-          <input type="text" id="name" required />
-          <label htmlFor="name">Post Title</label>
-        </div>
-
-        <div className="input-field">
-          <input type="text" id="email" required />
-          <label htmlFor="email">Post Description</label>
-        </div>
-
-        <div className="input-field">
-          <input type="text" id="username" required />
-          <label htmlFor="username">Reference Link</label>
-        </div>
-
-        <div className="input-field">
-          <input type="text" id="location" required />
-          <label htmlFor="location">Script/Command</label>
-        </div>
-        <div style={{width:'500px'}} >
-        <div for="occupation" style={{color:'silver',textAlign:'start',marginLeft:'10px'}}>
-          Thumbnail
-          </div>
-          <input type="file" id="occupation" required alt='Thumbnail' placeholder='Thumbnail' />
-          
-        </div>
-        <div className="input-field">
-          <input type="text" id="bio" required />
-          <label htmlFor="bio">Relevant Tags</label>
-        </div>
-      </div> */}
     </div>
     </div>
   );
