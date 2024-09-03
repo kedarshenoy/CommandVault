@@ -356,6 +356,7 @@ const addLinkInputBox = () =>
         .then((response) => response.json())
         .then((data) => {
           console.log("API Response:", data);
+          setShowsecond(true);
         })
         .catch((error) => {
           console.error("Error uploading document:", error);

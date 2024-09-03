@@ -17,8 +17,19 @@ justify-content: center;
 
 
 .content{
-    width: 800px;
+    width: 70vw;
     color: blue;
     font-size: 1rem;
     text-align: justify;
+}
+
+.exportlogo{
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+}
+
+.exportlogodiv{
+    display: flex;
+    justify-content: end;
 }
