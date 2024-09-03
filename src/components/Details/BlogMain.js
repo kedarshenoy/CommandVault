@@ -1,5 +1,6 @@
 import React from 'react'
 import html2pdf from 'html2pdf.js';
+import axios from 'axios';
 import '../../styles/BlogMain.css'
 import exportimg from '../../Assets/export.svg'
 import ImageComponent from '../Helpers/ImageComponent';
@@ -26,7 +27,11 @@ export default function BlogMain() {
     ];
 
 
+    const Fetchpost=()=>{
+      axios.get('http://localhost:5000/post').then(res=>{console.log(res)}).catch(err=>console.log(err));
+    }
 
+Fetchpost();
     return (
       <div>
         {data.map((item, index) => {
