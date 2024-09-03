@@ -2,6 +2,13 @@ import React from 'react'
 import html2pdf from 'html2pdf.js';
 import '../../styles/BlogMain.css'
 import exportimg from '../../Assets/export.svg'
+import ImageComponent from '../Helpers/ImageComponent';
+
+
+
+
+
+
 export default function BlogMain() {
 
   const DisplayContent = () => {
@@ -40,7 +47,8 @@ export default function BlogMain() {
           }
 
           if (item.type === 'image') {
-            return <img key={index} src={item.url} alt={item.fileName} style={{ maxWidth: '100%' }} />;
+            return <ImageComponent imagePath={'https://storage.googleapis.com/commandvault-3277f.appspot.com/lenovo-001.jpg'} />
+            // return <img key={index} src={item.url} alt={item.fileName} style={{ maxWidth: '100%' }} />;
           }
 
           return null; // Fallback return in case no type matches
@@ -69,6 +77,7 @@ export default function BlogMain() {
       <div>
 
         <div className='exportlogodiv'>
+          <p className='exportText' onClick={() => handleShare2()}>Get a Copy &nbsp;</p>
           <img onClick={() => handleShare2()} src={exportimg} className='exportlogo' />
         </div>
         {/* <img className='blogmainimg' src={require('../../Assets/content.jpeg')} alt=''/> */}

@@ -27,9 +27,20 @@ justify-content: center;
     height: 1.5rem;
     width: 1.5rem;
     cursor: pointer;
+
 }
 
 .exportlogodiv{
     display: flex;
+    align-items: center;
     justify-content: end;
+
+}
+
+.exportText{
+    color: #0000ff;
+    font: size 1.5rem;
+    cursor: pointer;
+
+
 }
