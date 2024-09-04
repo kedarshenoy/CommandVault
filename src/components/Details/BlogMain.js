@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import html2pdf from 'html2pdf.js';
 import axios from 'axios';
 import '../../styles/BlogMain.css'
@@ -13,25 +13,30 @@ import ImageComponent from '../Helpers/ImageComponent';
 export default function BlogMain() {
 
   const DisplayContent = () => {
-    const data = [
-      { text: 'kedar', type: 'code' },
-      { text: 'Kedar', type: 'heading' },
-      { text: 'dwfwfwf', type: 'text' },
-      { text: 'Shenoy', type: 'subheading' },
-      { text: 'sqsdqadwfqwfw', type: 'text' },
-      {
-        fileName: 'file_1',
-        type: 'image',
-        url: 'https://storage.googleapis.com/commandvault-3277f.appspot.com/code.svg'
-      }
-    ];
+    // const data = [
+    //   { text: 'kedar', type: 'code' },
+    //   { text: 'Kedar', type: 'heading' },
+    //   { text: 'dwfwfwf', type: 'text' },
+    //   { text: 'Shenoy', type: 'subheading' },
+    //   { text: 'sqsdqadwfqwfw', type: 'text' },
+    //   {
+    //     fileName: 'file_1',
+    //     type: 'image',
+    //     url: 'https://storage.googleapis.com/commandvault-3277f.appspot.com/code.svg'
+    //   }
+    // ];
 
+    let [data, setData]=useState([]);
 
     const Fetchpost=()=>{
-      axios.get('http://localhost:5000/post').then(res=>{console.log(res)}).catch(err=>console.log(err));
+      axios.get('http://localhost:5000/post').then(res=>{console.log(res.data); setData(res.data)}).catch(err=>console.log(err));
     }
 
-Fetchpost();
+
+    useEffect(()=>{
+      Fetchpost();
+    },[])
+
     return (
       <div>
         {data.map((item, index) => {
