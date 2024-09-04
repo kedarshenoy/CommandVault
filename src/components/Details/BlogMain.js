@@ -28,9 +28,21 @@ export default function BlogMain() {
 
     let [data, setData]=useState([]);
 
-    const Fetchpost=()=>{
-      axios.get('http://localhost:5000/post').then(res=>{console.log(res.data); setData(res.data)}).catch(err=>console.log(err));
+    // const Fetchpost=()=>{
+    //   axios.post('http://localhost:5000/post',{id:'-O5dXs09xSEoYC487V9h'}).then(res=>{console.log(res.data); setData(res.data)}).catch(err=>console.log(err));
+    // }
+
+    const Fetchpost = () => {
+      axios.post('http://localhost:5000/post', { postId: '-O5dXs09xSEoYC487V9h' }, {
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then(res => {
+          console.log(res.data);
+          setData(res.data); // Ensure setData is defined in scope
+        })
+        .catch(err => console.log(err));
     }
+    
 
 
     useEffect(()=>{
