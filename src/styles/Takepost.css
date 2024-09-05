@@ -195,3 +195,59 @@ color: blue;
 
   }
 }
+
+
+
+/* .TitleBlogMain{
+  box-sizing: border-box; 
+  width: 100%; 
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 10px; 
+  color: silver;
+  background-color: transparent; 
+  margin-bottom: 10px;
+}
+
+.TitleBlogMain::placeholder{
+  font-size: 16px;
+  color: silver;
+  font-weight: '700',
+
+}
+
+
+.posttitlelable{
+color: silver;
+} */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.TitleBlogMain {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  color: silver;
+  background-color: transparent;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.TitleBlogMain::placeholder {
+  font-size: 16px;
+  color: silver;
+  font-weight: 700;
+}
+
+.posttitlelable {
+  font-size: 16px;
+  color: silver;
+  font-weight: 700;
+  /* margin-bottom: 5px; */
+  text-align: left;
+}

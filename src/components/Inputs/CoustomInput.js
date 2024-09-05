@@ -367,6 +367,14 @@ const addLinkInputBox = () =>
 
   return (
     <div style={styles.editorContainer}>
+      
+      {/* <div className="TitleBlogMaindiv"> */}
+      <div  className='posttitlelable'>Post Title *</div>
+        <input type="text" id='postTitle' placeholder="Post Title"  className="TitleBlogMain"/>
+        <div  className='posttitlelable'>Post Thumbnail <span>(Optional)</span></div>
+        <input type='file' id="postThumbnail" className="TitleBlogMain"/>
+     
+      {/* </div> */}
       <div style={styles.header}>
         
           <button className='AddbtnPost' style={styles.button} onClick={addNormalInputBox}>
