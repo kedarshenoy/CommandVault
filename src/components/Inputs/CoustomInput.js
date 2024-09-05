@@ -1,6 +1,6 @@
 
 ////////////////////////////////////////////
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import CommandImg from '../../Assets/icons/code.svg'
 import Link from '../../Assets/icons/copy.svg'
 import H1 from '../../Assets/icons/h1.svg'
@@ -335,19 +335,58 @@ const addLinkInputBox = () =>
       return documentContent;
     };
     
+    // const handleSave = () => {
+    //   const documentContent = collectDocumentContent();
+      
+    //   const formData = new FormData();
+    
+    //   documentContent.forEach((item, index) => {
+    //     if (item.type === "file") {
+    //       formData.append(`file_${index}`, item.file);
+          
+    //     } else {
+    //       formData.append(`content_${index}`, JSON.stringify(item));
+    //     }
+    //   });
+    //   // Example API call
+    //   fetch("http://localhost:5000/upload", {
+    //     method: "POST",
+    //     body: formData,
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log("API Response:", data);
+    //       setShowsecond(true);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error uploading document:", error);
+    //     });
+    // };
+    
     const handleSave = () => {
       const documentContent = collectDocumentContent();
-      
+    
       const formData = new FormData();
     
+      // Append the Post Title and Post Thumbnail to the FormData
+      const postTitle = document.getElementById('postTitle').value;
+      const postThumbnail = document.getElementById('postThumbnail').files[0];
+    
+      formData.append('postTitle', postTitle);
+    
+      if (postThumbnail) {
+        formData.append('postThumbnail', postThumbnail);
+      }
+    
+      // Append other document content to FormData
       documentContent.forEach((item, index) => {
         if (item.type === "file") {
           formData.append(`file_${index}`, item.file);
-          
         } else {
           formData.append(`content_${index}`, JSON.stringify(item));
         }
       });
+    
       // Example API call
       fetch("http://localhost:5000/upload", {
         method: "POST",
@@ -363,7 +402,6 @@ const addLinkInputBox = () =>
         });
     };
     
-
 
   return (
     <div style={styles.editorContainer}>
