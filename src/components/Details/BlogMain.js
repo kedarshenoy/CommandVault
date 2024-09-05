@@ -8,8 +8,6 @@ import ImageComponent from '../Helpers/ImageComponent';
 
 
 
-
-
 export default function BlogMain() {
 
   const DisplayContent = () => {
@@ -43,8 +41,6 @@ export default function BlogMain() {
         .catch(err => console.log(err));
     }
     
-
-
     useEffect(()=>{
       Fetchpost();
     },[])
@@ -69,7 +65,7 @@ export default function BlogMain() {
           }
 
           if (item.type === 'image') {
-            return <ImageComponent imagePath={'https://storage.googleapis.com/commandvault-3277f.appspot.com/lenovo-001.jpg'} />
+            return <ImageComponent imagePath={item.url} key={index}/>
             // return <img key={index} src={item.url} alt={item.fileName} style={{ maxWidth: '100%' }} />;
           }
 
@@ -95,7 +91,7 @@ export default function BlogMain() {
   };
 
   return (
-    <div className='mainBlogdiv ' id='content-to-pdf'>
+    <div className='mainBlogdiv ' >
       <div>
 
         <div className='exportlogodiv'>
@@ -103,7 +99,7 @@ export default function BlogMain() {
           <img onClick={() => handleShare2()} src={exportimg} className='exportlogo' />
         </div>
         {/* <img className='blogmainimg' src={require('../../Assets/content.jpeg')} alt=''/> */}
-        <div className='content'>
+        <div className='content' id='content-to-pdf'>
           {DisplayContent()}
         </div>
         {/* Need to add profile name and photo  */}
