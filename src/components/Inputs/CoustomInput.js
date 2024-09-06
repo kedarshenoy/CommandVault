@@ -10,6 +10,7 @@ import '../../styles/Takepost.css'
 
 function CustomInput({setShowsecond}) {
   const contentEditableRef = useRef(null);
+  const [postTitle , setPostTitle] = useState();
 
   const focusAndPlaceCursor = () => {
     const contentDiv = contentEditableRef.current;
@@ -339,13 +340,17 @@ const addLinkInputBox = () =>
       const documentContent = collectDocumentContent();
       
       const formData = new FormData();
+      // console.log(postTitle)
+      const postname ={text:postTitle,type:'PostTitle'};
+      formData.append(`content_${0}`, JSON.stringify(postname));
     
       documentContent.forEach((item, index) => {
         if (item.type === "file") {
-          formData.append(`file_${index}`, item.file);
+          formData.append(`file_${index+2}`, item.file);
           
         } else {
-          formData.append(`content_${index}`, JSON.stringify(item));
+          formData.append(`content_${index+2}`, JSON.stringify(item));
+          console.log(item)
         }
       });
       // Example API call
@@ -368,7 +373,7 @@ const addLinkInputBox = () =>
       
       {/* <div className="TitleBlogMaindiv"> */}
       <div  className='posttitlelable'>Post Title *</div>
-        <input type="text" id='postTitle' placeholder="Post Title"  className="TitleBlogMain"/>
+        <input type="text" id='postTitle' placeholder="Post Title"  value={postTitle} onChange={(e)=>setPostTitle(e.target.value)} className="TitleBlogMain"/>
         <div  className='posttitlelable'>Post Thumbnail <span>(Optional)</span></div>
         <input type='file' id="postThumbnail" className="TitleBlogMain"/>
      
