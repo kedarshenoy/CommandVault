@@ -212,72 +212,14 @@ const addLinkInputBox = () =>
       "Add Subheading",
       "Subheading"
     );
-    // const collectDocumentContent = () => {
-    //   const contentDiv = contentEditableRef.current;
-    //   if (!contentDiv) return [];
-    
-    //   const documentContent = [];
-    
-    //   const children = contentDiv.childNodes;
-    
-    //   children.forEach((child) => {
-    //     if (child.nodeType === Node.TEXT_NODE) {
-    //       // Capture plain text nodes
-    //       const text = child.textContent.trim();
-    //       if (text) {
-    //         documentContent.push({
-    //           text: text,
-    //           type: "text",
-    //         });
-    //       }
-    //     } else if (child.nodeType === Node.ELEMENT_NODE) {
-    //       if (child.nodeName === "DIV") {
-    //         const inputElement = child.querySelector("input[type='text'], input[type='file']");
-    //         if (inputElement) {
-    //           const placeholder = inputElement.getAttribute("placeholder");
-    //           let type = "text";
-    //           if (placeholder === "Add Heading") {
-    //             type = "heading";
-    //           } else if (placeholder === "Add Subheading") {
-    //             type = "subheading";
-    //           } else if (placeholder === "Add Command") {
-    //             type = "code";
-    //           } 
-    //           else if (placeholder === "Add Link") {
-    //             type = "link";
-    //           }else if (inputElement.type === "file") {
-    //             const file = inputElement.files[0];
-    //             if (file) {
-    //               documentContent.push({
-    //                 type: "file",
-    //                 file, // include the file object
-    //                 name: file.name, // file name for reference
-    //               });
-    //             }
-    //             return; // Skip adding text info for the file input
-    //           }
-    //           documentContent.push({
-    //             text: inputElement.value || placeholder,
-    //             type,
-    //           });
-    //         }
-    //       }
-    //     }
-    //   });
-    
-    //   return documentContent;
-    // };
-    
-
-
     const collectDocumentContent = () => {
       const contentDiv = contentEditableRef.current;
       if (!contentDiv) return [];
-      
+    
       const documentContent = [];
-      
+    
       const children = contentDiv.childNodes;
-      
+    
       children.forEach((child) => {
         if (child.nodeType === Node.TEXT_NODE) {
           // Capture plain text nodes
@@ -293,18 +235,17 @@ const addLinkInputBox = () =>
             const inputElement = child.querySelector("input[type='text'], input[type='file']");
             if (inputElement) {
               const placeholder = inputElement.getAttribute("placeholder");
-              const dataType = child.getAttribute("data-type"); // Get the data-type attribute
-    
               let type = "text";
-              if (dataType === "heading") {
+              if (placeholder === "Add Heading") {
                 type = "heading";
-              } else if (dataType === "subheading") {
+              } else if (placeholder === "Add Subheading") {
                 type = "subheading";
-              } else if (dataType === "code") {
+              } else if (placeholder === "Add Command") {
                 type = "code";
-              } else if (dataType === "link") {
-                type = "link"; // Add this line to handle link inputs
-              } else if (inputElement.type === "file") {
+              } 
+              else if (placeholder === "Add Link") {
+                type = "link";
+              }else if (inputElement.type === "file") {
                 const file = inputElement.files[0];
                 if (file) {
                   documentContent.push({
@@ -315,78 +256,98 @@ const addLinkInputBox = () =>
                 }
                 return; // Skip adding text info for the file input
               }
-              
-              if (type === "link") {
-                documentContent.push({
-                  text: inputElement.value || placeholder,
-                  type: "link", // Specify the type as link
-                });
-              } else {
-                documentContent.push({
-                  text: inputElement.value || placeholder,
-                  type,
-                });
-              }
+              documentContent.push({
+                text: inputElement.value || placeholder,
+                type,
+              });
             }
           }
         }
       });
-      
+    
       return documentContent;
     };
     
-    // const handleSave = () => {
-    //   const documentContent = collectDocumentContent();
+
+
+    // const collectDocumentContent = () => {
+    //   const contentDiv = contentEditableRef.current;
+    //   if (!contentDiv) return [];
       
-    //   const formData = new FormData();
+    //   const documentContent = [];
+      
+    //   const children = contentDiv.childNodes;
+      
+    //   children.forEach((child) => {
+    //     if (child.nodeType === Node.TEXT_NODE) {
+    //       // Capture plain text nodes
+    //       const text = child.textContent.trim();
+    //       if (text) {
+    //         documentContent.push({
+    //           text: text,
+    //           type: "text",
+    //         });
+    //       }
+    //     } else if (child.nodeType === Node.ELEMENT_NODE) {
+    //       if (child.nodeName === "DIV") {
+    //         const inputElement = child.querySelector("input[type='text'], input[type='file']");
+    //         if (inputElement) {
+    //           const placeholder = inputElement.getAttribute("placeholder");
+    //           const dataType = child.getAttribute("data-type"); // Get the data-type attribute
     
-    //   documentContent.forEach((item, index) => {
-    //     if (item.type === "file") {
-    //       formData.append(`file_${index}`, item.file);
-          
-    //     } else {
-    //       formData.append(`content_${index}`, JSON.stringify(item));
+    //           let type = "text";
+    //           if (dataType === "heading") {
+    //             type = "heading";
+    //           } else if (dataType === "subheading") {
+    //             type = "subheading";
+    //           } else if (dataType === "code") {
+    //             type = "code";
+    //           } else if (dataType === "link") {
+    //             type = "link"; // Add this line to handle link inputs
+    //           } else if (inputElement.type === "file") {
+    //             const file = inputElement.files[0];
+    //             if (file) {
+    //               documentContent.push({
+    //                 type: "file",
+    //                 file, // include the file object
+    //                 name: file.name, // file name for reference
+    //               });
+    //             }
+    //             return; // Skip adding text info for the file input
+    //           }
+              
+    //           if (type === "link") {
+    //             documentContent.push({
+    //               text: inputElement.value || placeholder,
+    //               type: "link", // Specify the type as link
+    //             });
+    //           } else {
+    //             documentContent.push({
+    //               text: inputElement.value || placeholder,
+    //               type,
+    //             });
+    //           }
+    //         }
+    //       }
     //     }
     //   });
-    //   // Example API call
-    //   fetch("http://localhost:5000/upload", {
-    //     method: "POST",
-    //     body: formData,
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log("API Response:", data);
-    //       setShowsecond(true);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error uploading document:", error);
-    //     });
+      
+    //   return documentContent;
     // };
     
     const handleSave = () => {
       const documentContent = collectDocumentContent();
-    
+      
       const formData = new FormData();
     
-      // Append the Post Title and Post Thumbnail to the FormData
-      const postTitle = document.getElementById('postTitle').value;
-      const postThumbnail = document.getElementById('postThumbnail').files[0];
-    
-      formData.append('postTitle', postTitle);
-    
-      if (postThumbnail) {
-        formData.append('postThumbnail', postThumbnail);
-      }
-    
-      // Append other document content to FormData
       documentContent.forEach((item, index) => {
         if (item.type === "file") {
           formData.append(`file_${index}`, item.file);
+          
         } else {
           formData.append(`content_${index}`, JSON.stringify(item));
         }
       });
-    
       // Example API call
       fetch("http://localhost:5000/upload", {
         method: "POST",
@@ -402,7 +363,6 @@ const addLinkInputBox = () =>
         });
     };
     
-
   return (
     <div style={styles.editorContainer}>
       

@@ -5,7 +5,7 @@
 // <div> 
 //       <h1  style ={{color:'blue',textAlign:'center'}}>Create new Post</h1>
 //     <div className='MainPostinputBox' >
-//       <div class="input-field">
+//       <div className="input-field">
 //     <input type="text" id="name" required />
 //     <label for="name">Your name:</label>
 //   </div>
