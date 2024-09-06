@@ -343,6 +343,13 @@ const addLinkInputBox = () =>
       // console.log(postTitle)
       const postname ={text:postTitle,type:'PostTitle'};
       formData.append(`content_${0}`, JSON.stringify(postname));
+
+      const bannerImage= document.getElementById('postThumbnail');
+      if (bannerImage.files && bannerImage.files.length > 0) {
+        // Get the first file from the input
+        const banner = bannerImage.files[0];
+        formData.append(`file_${1}`, banner);
+      }
     
       documentContent.forEach((item, index) => {
         if (item.type === "file") {
