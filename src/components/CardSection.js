@@ -17,8 +17,9 @@ export default function CardSection() {
     const arr =[]
     posts.map((item,index)=>{
       arr.push( <div className="gallery-item">
-      <div style={{color:'white',textAlign:'center',fontFamily:'Roboto',fontWeight:'400',fontStyle:'normal',fontSize:'1.25rem',marginBottom:'15px'}}>Name goes here fghffffldkejctyhthkmio45jok5o</div>
-      <img src={img} alt='d'className="gallery-img"/>
+      <div style={{color:'white',textAlign:'center',fontFamily:'Roboto',fontWeight:'400',fontStyle:'normal',fontSize:'1.25rem',marginBottom:'15px'}}>{item[0].text}</div>
+      {/* <img src={item[1].type ==='image' ? item[1].url :img} alt='d'className="gallery-img"/> */}
+      
       </div>)
     })
     console.log(arr)

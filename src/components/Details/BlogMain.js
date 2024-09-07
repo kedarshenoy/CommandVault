@@ -31,7 +31,7 @@ export default function BlogMain() {
     // }
 
     const Fetchpost = () => {
-      axios.post('http://localhost:5000/post', { postId: '-O5dXs09xSEoYC487V9h' }, {
+      axios.post('http://localhost:5000/post', { postId: '-O6A9wpj9CbgWTYQzDR2' }, {
         headers: { 'Content-Type': 'application/json' }
       })
         .then(res => {
