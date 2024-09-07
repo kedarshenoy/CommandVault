@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getDownloadURL, ref } from "firebase/storage";
 import storage from "../firebase"; 
-const ImageComponent = ({ imagePath }) => {
+const FirebaseImage = ({ imagePath }) => {
     const [imageURL, setImageURL] = useState("");
   
     useEffect(() => {
@@ -25,4 +25,4 @@ const ImageComponent = ({ imagePath }) => {
     );
   };
 
-  export default ImageComponent;
+  export default FirebaseImage;
