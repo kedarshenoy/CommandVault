@@ -4,12 +4,15 @@ import axios from 'axios';
 import '../../styles/BlogMain.css'
 import exportimg from '../../Assets/export.svg'
 import ImageComponent from '../Helpers/ImageComponent';
-
+import { useLocation } from 'react-router-dom';
 
 
 
 export default function BlogMain() {
-
+  const location = useLocation();
+  const { blogData } = location.state || {};
+  // const [post, setPost]=useState();
+  // console.log(blogData);
   const DisplayContent = () => {
     // const data = [
     //   { text: 'kedar', type: 'code' },
@@ -24,26 +27,26 @@ export default function BlogMain() {
     //   }
     // ];
 
-    let [data, setData]=useState([]);
+    let [data, setData]=useState(blogData);
 
     // const Fetchpost=()=>{
     //   axios.post('http://localhost:5000/post',{id:'-O5dXs09xSEoYC487V9h'}).then(res=>{console.log(res.data); setData(res.data)}).catch(err=>console.log(err));
     // }
 
-    const Fetchpost = () => {
-      axios.post('http://localhost:5000/post', { postId: '-O6A9wpj9CbgWTYQzDR2' }, {
-        headers: { 'Content-Type': 'application/json' }
-      })
-        .then(res => {
-          console.log(res.data);
-          setData(res.data); // Ensure setData is defined in scope
-        })
-        .catch(err => console.log(err));
-    }
+    // const Fetchpost = () => {
+    //   axios.post('http://localhost:5000/post', { postId: '-O6A9wpj9CbgWTYQzDR2' }, {
+    //     headers: { 'Content-Type': 'application/json' }
+    //   })
+    //     .then(res => {
+    //       console.log(res.data);
+    //       setData(res.data); // Ensure setData is defined in scope
+    //     })
+    //     .catch(err => console.log(err));
+    // }
     
-    useEffect(()=>{
-      Fetchpost();
-    },[])
+    // useEffect(()=>{
+    //   Fetchpost();
+    // },[])
 
     return (
       <div>
