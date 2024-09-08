@@ -5,13 +5,20 @@ import Nav from './components/Nav';
 import Chat from './components/Chat';
 import Login from './components/Login/Login';
 import BlogMain from './components/Details/BlogMain';
+import ProtectedRoute from './components/ProtectedRoute';
 const Router =()=> {
     return (
         <>
         <BrowserRouter>
             <Nav/>
         <Routes>
-            <Route path='/'Component={Home} ></Route>
+            <Route path='/'
+                      element={
+                        <ProtectedRoute>
+                          <Home />
+                        </ProtectedRoute>
+                      }
+            ></Route>
             <Route path='/post'Component={Takepost} ></Route>
             <Route path='/chat'Component={Chat} ></Route>
             <Route path='/login'Component={Login} ></Route>
