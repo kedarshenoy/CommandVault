@@ -150,7 +150,7 @@ const navigate = useNavigate();
             url:'http://localhost:5000/signup',
             data:values,
 
-        }).then(res=> navigate('/post')).catch(err=>{ if (err.response) {
+        }).then(res=> {localStorage.setItem("Token",res.data.Token);navigate('/post')}).catch(err=>{ if (err.response) {
             setError(err.response.data); 
         } else {
             setError("Something went wrong");
@@ -172,7 +172,7 @@ const navigate = useNavigate();
             url:'http://localhost:5000/login',
             data:values,
 
-        }).then(res=> {localStorage.setItem("Token",res.data.Token);navigate('/post')}).catch(err=>{ if (err.response) {
+        }).then(res=> {localStorage.setItem("Token",res.data.Token);navigate('/')}).catch(err=>{ if (err.response) {
             setError(err.response.data); 
         } else {
             setError("Something went wrong");
