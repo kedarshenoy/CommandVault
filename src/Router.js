@@ -6,6 +6,7 @@ import Chat from './components/Chat';
 import Login from './components/Login/Login';
 import BlogMain from './components/Details/BlogMain';
 import ProtectedRoute from './components/ProtectedRoute';
+import SearchPage from './components/SearchPage/Search';
 const Router =()=> {
     return (
         <>
@@ -23,6 +24,7 @@ const Router =()=> {
             <Route path='/chat'Component={Chat} ></Route>
             <Route path='/login'Component={Login} ></Route>
             <Route path='/blog'Component={BlogMain} ></Route>
+            <Route path='/search' Component={SearchPage}></Route>
 
         </Routes>
         </BrowserRouter>

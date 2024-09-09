@@ -14,39 +14,8 @@ export default function BlogMain() {
   // const [post, setPost]=useState();
   // console.log(blogData);
   const DisplayContent = () => {
-    // const data = [
-    //   { text: 'kedar', type: 'code' },
-    //   { text: 'Kedar', type: 'heading' },
-    //   { text: 'dwfwfwf', type: 'text' },
-    //   { text: 'Shenoy', type: 'subheading' },
-    //   { text: 'sqsdqadwfqwfw', type: 'text' },
-    //   {
-    //     fileName: 'file_1',
-    //     type: 'image',
-    //     url: 'https://storage.googleapis.com/commandvault-3277f.appspot.com/code.svg'
-    //   }
-    // ];
 
     let [data, setData]=useState(blogData);
-
-    // const Fetchpost=()=>{
-    //   axios.post('http://localhost:5000/post',{id:'-O5dXs09xSEoYC487V9h'}).then(res=>{console.log(res.data); setData(res.data)}).catch(err=>console.log(err));
-    // }
-
-    // const Fetchpost = () => {
-    //   axios.post('http://localhost:5000/post', { postId: '-O6A9wpj9CbgWTYQzDR2' }, {
-    //     headers: { 'Content-Type': 'application/json' }
-    //   })
-    //     .then(res => {
-    //       console.log(res.data);
-    //       setData(res.data); // Ensure setData is defined in scope
-    //     })
-    //     .catch(err => console.log(err));
-    // }
-    
-    // useEffect(()=>{
-    //   Fetchpost();
-    // },[])
 
     return (
       <div>
