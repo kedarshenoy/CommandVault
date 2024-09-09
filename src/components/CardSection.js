@@ -76,7 +76,10 @@ export default function CardSection() {
 
   // Fetch posts from the API
   const getPosts = () => {
-    axios.get('http://localhost:5000/post/all')
+    axios.get('http://localhost:5000/post/all',{
+      headers: {
+        'authorization': `Bearer ${localStorage.getItem('Token')}` }
+    })
       .then((res) => {
         setPosts(res.data);
         console.log(res.data); // Log the posts data
