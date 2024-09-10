@@ -13,7 +13,7 @@ export default function Nav() {
             <span style={{fontFamily:'Roboto',fontWeight:'400',fontStyle:'normal',letterSpacing:1.5,color:'blue',cursor:'pointer',fontSize:'1.15rem'}} onClick={()=>{navigation('/')}}>Home</span>
             <span style={{fontFamily:'Roboto',fontWeight:'400',fontStyle:'normal',letterSpacing:1.5,color:'blue',cursor:'pointer',fontSize:'1.15rem'}} onClick={()=>{navigation('/post')}}>Post</span>
             <span style={{fontFamily:'Roboto',fontWeight:'400',fontStyle:'normal',letterSpacing:1.5,color:'blue',cursor:'pointer',fontSize:'1.15rem'}} onClick={()=>{navigation('/chat')}}>Chat</span>
-            <span><input type='text' className='inputBoxNav' placeholder='Search'/><i className="fas fa-search" aria-hidden="true"></i></span>
+            <span onClick={()=>{navigation('/search')}}><input type='text' className='inputBoxNav' placeholder='Search'/><i className="fas fa-search" aria-hidden="true"></i></span>
 
         </div>
         <div>

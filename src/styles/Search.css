@@ -9,6 +9,9 @@
     border: 1px solid silver;
     border-radius: 10px;
     color: silver;
+    padding:  9px;
+    font-size: 1.25rem;
+
 }
 
 .searchBTn{
@@ -17,6 +20,7 @@
     cursor: pointer;
     border: 1px solid silver;
     padding: 9px;
+    font-size: 1.25rem;
     border-radius: 15px;
 }
 
