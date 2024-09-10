@@ -7,6 +7,7 @@ import FirebaseImage from '../FirebaseImage';
 export default function Search() {
     const navigate = useNavigate(); 
     const [posts, setPosts] = useState([]);
+    const [querry,setQuerry] =useState([]);
     const getPosts = () => {
 
         axios.get('http://localhost:5000/post/all',{
@@ -21,6 +22,26 @@ export default function Search() {
             console.log(err); // Log any errors
           });
       };
+
+      const sendQuerry =()=>{
+        axios.get('http://localhost:5000/post/search',{
+          headers: {
+            'authorization': `Bearer ${localStorage.getItem('Token')}` },
+            params: {
+              query: querry
+          }
+        },
+      )
+          .then((res) => {
+            setPosts(res.data);
+            console.log(res.data); // Log the posts data
+          })
+          .catch((err) => {
+            console.log(err); // Log any errors
+          });
+      }
+
+
       const handleNavigation = (data) => {
         navigate('/blog', { state: { blogData: data } }); // Navigate with state
       };
@@ -54,7 +75,7 @@ export default function Search() {
         <div >
             <h1 className='searchHeading'>Explore Blogs</h1>
             <div style={{padding:'50px' ,display:'flex', alignItems:'center' ,justifyContent:'space-around'}}>
-            <input className='searchBar' type='text' placeholder='search'/> <div className='searchBTn'>Search</div>
+            <input className='searchBar' type='text' placeholder='search' value={querry} onChange={(e)=>{setQuerry(e.target.value)}}/> <div onClick={()=>{sendQuerry()}} className='searchBTn'>Search</div>
             </div>
 
 
