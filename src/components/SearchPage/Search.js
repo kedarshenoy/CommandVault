@@ -58,9 +58,9 @@ export default function Search() {
               fontSize: '1.25rem',
               marginBottom: '15px'
             }}>
-              {item[0].text} {/* Adjust based on your data structure */}
+              {item[0].text} 
             </div>
-            <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} /> {/* Adjust based on your data structure */}
+            <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} />
           </div>
         ));
       };
@@ -79,7 +79,7 @@ export default function Search() {
             </div>
 
 
-            <div>
+            <div className='gallery'>
             {renderPosts()}
             </div>
         </div>
