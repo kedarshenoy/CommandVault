@@ -18,7 +18,14 @@ export default function BlogMain() {
     let [data, setData]=useState(blogData);
 
     return (
-      <div>
+      <div style={{backgroundColor:'black'}}>
+        {
+        data.forEach((ele, index )=>{
+            if(ele.type === 'image' && ele.fileName =='file_1'){
+              <div><ImageComponent imagePath={ele.url} key={index}/></div>
+            } 
+        })
+        }
         {data.map((item, index) => {
           if (item.type === 'code') {
             return <h4 key={index} style={{ color: 'blue' }}>{item.text}</h4>;
@@ -36,7 +43,7 @@ export default function BlogMain() {
             return <p key={index}>{item.text}</p>;
           }
 
-          if (item.type === 'image') {
+          if (item.type === 'image' && item.fileName !=='file_1') {
             return <ImageComponent imagePath={item.url} key={index}/>
             // return <img key={index} src={item.url} alt={item.fileName} style={{ maxWidth: '100%' }} />;
           }

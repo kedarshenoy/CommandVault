@@ -348,7 +348,7 @@ const addLinkInputBox = () =>
       if (bannerImage.files && bannerImage.files.length > 0) {
         // Get the first file from the input
         const banner = bannerImage.files[0];
-        formData.append(`file_${1}`, banner);
+        formData.append(`file_1`, banner);
       }
     
       documentContent.forEach((item, index) => {

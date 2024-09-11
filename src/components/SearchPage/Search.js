@@ -4,6 +4,10 @@ import axios from 'axios';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FirebaseImage from '../FirebaseImage';
+import Lottie from 'lottie-react';
+import notFound from '../../Assets/notfound.json'
+import l1 from '../../Assets/l1.json';
+
 export default function Search() {
     const navigate = useNavigate(); 
     const [posts, setPosts] = useState([]);
@@ -47,6 +51,13 @@ export default function Search() {
       };
 
       const renderPosts = () => {
+        if(posts.length === 0){
+          // return  <Lottie  animationData={l1} loop={true} style={{ height: '200px', width: '200px' }} />
+        
+          return  <div style={{textAlign:'center'}}>
+            <Lottie  animationData={notFound} loop={true} style={{ height: '500px', width: '500px' }} />
+            </div>
+        }
         return posts.map((item, index) => (
           <div key={index} className="gallery-item" onClick={() => handleNavigation(item)}>
             <div style={{

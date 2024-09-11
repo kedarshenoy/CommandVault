@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import storage from "../../firebase"; 
 
 
-const ImageComponent = ({ imagePath }) => {
+const ImageComponent = ({ imagePath ,banner=false}) => {
     const [imageURL, setImageURL] = useState("");
   
     useEffect(() => {
@@ -23,7 +23,7 @@ const ImageComponent = ({ imagePath }) => {
   
     return (
       <div>
-        {imageURL ? <img src={imageURL} alt="" style={{height:'100px',width:'100px'}}/> : <p>Loading...</p>}
+        {imageURL ? banner ? <img src={imageURL} alt="" style={{height:'500px',width:'500px'}}/>:<img src={imageURL} alt="" style={{height:'100px',width:'100px'}}/> : <p>Loading...</p>}
       </div>
     );
   };
