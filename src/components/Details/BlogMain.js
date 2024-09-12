@@ -16,16 +16,15 @@ export default function BlogMain() {
   const DisplayContent = () => {
 
     let [data, setData]=useState(blogData);
-
+    console.log(data)
     return (
       <div style={{backgroundColor:'black'}}>
         {
-        data.forEach((ele, index )=>{
-            if(ele.type === 'image' && ele.fileName =='file_1'){
-              <div><ImageComponent imagePath={ele.url} key={index}/></div>
-            } 
-        })
-        }
+          
+       data[1].type === 'image' ? <div><ImageComponent imagePath={data[1].url} banner={true}/></div> :<div></div>
+       }
+        
+        
         {data.map((item, index) => {
           if (item.type === 'code') {
             return <h4 key={index} style={{ color: 'blue' }}>{item.text}</h4>;

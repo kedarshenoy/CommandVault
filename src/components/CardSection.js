@@ -38,6 +38,7 @@ export default function CardSection() {
   const renderPosts = () => {
     return posts.map((item, index) => (
       <div key={index} className="gallery-item" onClick={() => handleNavigation(item)}>
+       { console.log(item)}
         <div style={{
           color: 'white',
           textAlign: 'center',
