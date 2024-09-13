@@ -179,6 +179,10 @@ const navigate = useNavigate();
         }})
     }
 
+    const guest=()=>{
+        localStorage.setItem("Token",'Guest');
+        navigate('/')
+    }
     return (
         <div className='MainLogin'>
             <div className='loginBox'>
@@ -200,6 +204,8 @@ const navigate = useNavigate();
                                 <input className='inputBox' type='password' placeholder='Password' required value={Password} onChange={(e)=>setPassword(e.target.value)}/>
                                 <input className='inputBox' type='password' placeholder='Confirm Password' required value={confirmPass} onChange={(e)=>setconfirmPass(e.target.value)}/>
                                 <div className='loginSubmit' onClick={()=>handleSignup()} >SignUp</div>
+                                <div className='loginSubmit' style={{ marginLeft:'20px'}} onClick={()=>guest()} >Guest Mode</div>
+
                             </div>
                         </div>
                     </div>
@@ -214,6 +220,8 @@ const navigate = useNavigate();
                                 <input className='inputBox' type='password' placeholder='Password' required value={Password} onChange={(e)=>setPassword(e.target.value)}/>
                                 {/* <input className='inputBox' type='password' placeholder='Confirm Password' required /> */}
                                 <div  className='loginSubmit'onClick={()=>handleLogin()}>Login</div>
+                                <div className='loginSubmit' style={{ marginLeft:'20px'}} onClick={()=>guest()} >Guest Mode</div>
+
                             </div>
                             <Lottie animationData={Loginlogo} loop={false} style={{ height: '50vh', width: '50vh' }} />
                         </div>
