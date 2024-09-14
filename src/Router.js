@@ -2,7 +2,7 @@ import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import Home from './components/Home';
 import Takepost from './components/Inputs/Takepost';
 import Nav from './components/Nav';
-import Chat from './components/Chat';
+import Profile from './components/Profile';
 import Login from './components/Login/Login';
 import BlogMain from './components/Details/BlogMain';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -21,7 +21,7 @@ const Router =()=> {
                       }
             ></Route>
             <Route path='/post'Component={Takepost} ></Route>
-            <Route path='/chat'Component={Chat} ></Route>
+            <Route path='/profile'Component={Profile} ></Route>
             <Route path='/login'Component={Login} ></Route>
             <Route path='/blog'Component={BlogMain} ></Route>
             <Route path='/search' Component={SearchPage}></Route>

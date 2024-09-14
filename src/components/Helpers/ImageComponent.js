@@ -23,7 +23,7 @@ const ImageComponent = ({ imagePath ,banner=false}) => {
   
     return (
       <div>
-        {imageURL ? banner ? <img src={imageURL} alt="" style={{height:'500px',width:'500px'}}/>:<img src={imageURL} alt="" style={{height:'100px',width:'100px'}}/> : <p>Loading...</p>}
+        {imageURL ? banner ? <img src={imageURL} alt="" style={{height:'50vh',width:'50vw', objectFit:'contain'}}/>:<img src={imageURL} alt="" style={{height:'100px',width:'100px'}}/> : <p>Loading...</p>}
       </div>
     );
   };

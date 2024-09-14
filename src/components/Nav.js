@@ -51,7 +51,7 @@ export default function Nav() {
       <div className={`nav-links ${isOpen ? 'open' : ''}`}>
         <span onClick={() => {toggleMenu(); navigate('/')}}>Home</span>
         <span onClick={() => {toggleMenu(); navigate('/post')}}>Post</span>
-        <span onClick={() => {toggleMenu(); navigate('/chat')}}>Chat</span>
+        <span onClick={() => {toggleMenu(); navigate('/profile')}}>Profile</span>
         <span onClick={() => {toggleMenu(); navigate('/search')}}>
           <input type="text" className="inputBoxNav" placeholder="Search" />
           <span className='searchname'>Search </span>

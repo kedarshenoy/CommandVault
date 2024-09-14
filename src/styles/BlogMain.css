@@ -9,6 +9,12 @@ display: flex;
 justify-content: center;
 }
 
+.postTiltle{
+    color: silver;
+    font-size: 2rem;
+    text-align: left;
+}
+
 .mainPostHeading{
     color: blue;
     font-size: 1.5rem;
@@ -43,4 +49,22 @@ justify-content: center;
     cursor: pointer;
 
 
+}
+
+
+.postcode{
+    color: gray;
+}
+
+.postHeading{
+    color: orange;
+}
+
+
+.postSubhead{
+    color: greenyellow;
+}   
+
+.postText{
+    color: beige;
 }
