@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-// import html2pdf from 'html2pdf.js';
+import html2pdf from 'html2pdf.js';
 import axios from 'axios';
 import '../../styles/BlogMain.css'
 import exportimg from '../../Assets/export.svg'
@@ -59,21 +59,21 @@ export default function BlogMain() {
       </div>
     );
   };
-  // const handleShare2 = () => {
-  //   // Select the content you want to convert to PDF
-  //   const content = document.getElementById('content-to-pdf');
+  const handleShare2 = () => {
+    // Select the content you want to convert to PDF
+    const content = document.getElementById('content-to-pdf');
 
-  //   // Configure the PDF options
-  //   const options = {
-  //     filename: 'page.pdf',
-  //     image: { type: 'jpeg', quality: 0.98 },
-  //     html2canvas: { scale: 2 },
-  //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-  //   };
+    // Configure the PDF options
+    const options = {
+      filename: 'page.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
 
-  //   // Convert the content to PDF
-  //   html2pdf().set(options).from(content).save();
-  // };
+    // Convert the content to PDF
+    html2pdf().set(options).from(content).save();
+  };
 
 
   // const handleShare2=()=>{
@@ -88,9 +88,9 @@ export default function BlogMain() {
     
   // }
 
-  const handleShare2=()=>{
-    console.log('fucked')
-  }
+  // const handleShare2=()=>{
+  //   console.log('fucked')
+  // }
 
   // const handleShare2 = () => {
   //   const content = document.getElementById('content-to-pdf');
