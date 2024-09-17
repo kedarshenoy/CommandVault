@@ -282,12 +282,234 @@
 //   );
 // }
 
+// //////////////////////////
+// import React, { useEffect, useState } from 'react';
+// import { PDFDownloadLink, Page, Text, Image, Document, StyleSheet } from "@react-pdf/renderer";
+// import GetURL from './GetURL';
+// import { useLocation } from 'react-router-dom';
+// const styles = StyleSheet.create({
+//   page: {
+//     padding: 10,
+//     backgroundColor: '#ffffff',
+//   },
+//   heading: {
+//     fontSize: 24,
+//     marginBottom: 10,
+//     color: '#000',
+//   },
+//   subheading: {
+//     fontSize: 18,
+//     marginBottom: 10,
+//     color: '#555',
+//   },
+//   text: {
+//     fontSize: 12,
+//     marginBottom: 5,
+//     color: '#000',
+//   },
+//   code: {
+//     fontSize: 12,
+//     fontFamily: 'Courier',
+//     backgroundColor: '#f5f5f5',
+//     padding: 5,
+//   },
+//   image: {
+//     marginVertical: 10,
+//     width: 200,
+//     height: 150,
+//   }
+// });
+
+// const DisplayContent = ({ data }) => {
+//   const [updatedData, setUpdatedData] = useState(data);
+
+
+//   return (
+//     <Document>
+//       <Page style={styles.page}>
+//         {data.map((item, index) => {
+//           if (item.type === 'PostTitle') {
+//             return <Text key={index} style={styles.heading}>{item.text}</Text>;
+//           }
+
+//           if (item.type === 'heading') {
+//             return <Text key={index} style={styles.heading}>{item.text}</Text>;
+//           }
+
+//           if (item.type === 'subheading') {
+//             return <Text key={index} style={styles.subheading}>{item.text}</Text>;
+//           }
+
+//           if (item.type === 'text') {
+//             return <Text key={index} style={styles.text}>{item.text}</Text>;
+//           }
+
+//           if (item.type === 'code') {
+//             return <Text key={index} style={styles.code}>{item.text}</Text>;
+//           }
+
+//           if (item.type === 'image') {
+//             return (
+//               <Image key={index} src={item.url} style={styles.image} />
+//             );
+//           }
+
+//           return null; // fallback for undefined types
+//         })}
+//       </Page>
+//     </Document>
+//   );
+// };
+
+// export default function BlogMain() {
+//   const location = useLocation();
+//   const { blogData } = location.state || {};
+
+//   return (
+//     <div className='mainBlogdiv'>
+//       <div>
+//         <PDFDownloadLink document={<DisplayContent data={blogData} />} filename="BlogPost.pdf">
+//           {({ loading }) => loading ? <button>Loading Document...</button> : <button>Download PDF</button>}
+//         </PDFDownloadLink>
+//         <div className='content' id='content-to-pdf'>
+//           {/* Blog content preview can still use HTML here */}
+//           <img src={blogData[1].url} alt='' />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// import React, { useEffect, useState } from 'react';
+// import { PDFDownloadLink, Page, Text, Image, Document, StyleSheet } from '@react-pdf/renderer';
+// import { useLocation } from 'react-router-dom';
+// const styles = StyleSheet.create({
+//   page: {
+//     padding: 10,
+//     backgroundColor: '#ffffff',
+//   },
+//   heading: {
+//     fontSize: 24,
+//     marginBottom: 10,
+//     color: '#000',
+//   },
+//   subheading: {
+//     fontSize: 18,
+//     marginBottom: 10,
+//     color: '#555',
+//   },
+//   text: {
+//     fontSize: 12,
+//     marginBottom: 5,
+//     color: '#000',
+//   },
+//   code: {
+//     fontSize: 12,
+//     fontFamily: 'Courier',
+//     backgroundColor: '#f5f5f5',
+//     padding: 5,
+//   },
+//   image: {
+//     marginVertical: 10,
+//     width: 200,
+//     height: 150,
+//   },
+// });
+
+// const getBase64Image = async (url) => {
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) throw new Error(`Failed to load image: ${response.statusText}`);
+    
+//     const blob = await response.blob();
+//     return new Promise((resolve) => {
+//       const reader = new FileReader();
+//       reader.onloadend = () => resolve(reader.result);  // Base64 string
+//       reader.readAsDataURL(blob);
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     return null;  // Return null if fetch failed
+//   }
+// };
+
+// const preloadImages = async (data) => {
+//   const updatedData = await Promise.all(
+//     data.map(async (item) => {
+//       if (item.type === 'image') {
+//         const base64Image = await getBase64Image(item.url);
+//         return { ...item, base64Image };
+//       }
+//       return item;
+//     })
+//   );
+//   return updatedData;
+// };
+
+// const DisplayContent = ({ data }) => (
+//   <Document>
+//     <Page style={styles.page}>
+//       {data.map((item, index) => {
+//         if (item.type === 'heading') {
+//           return <Text key={index} style={styles.heading}>{item.text}</Text>;
+//         }
+//         if (item.type === 'subheading') {
+//           return <Text key={index} style={styles.subheading}>{item.text}</Text>;
+//         }
+//         if (item.type === 'text') {
+//           return <Text key={index} style={styles.text}>{item.text}</Text>;
+//         }
+//         if (item.type === 'code') {
+//           return <Text key={index} style={styles.code}>{item.text}</Text>;
+//         }
+//         if (item.type === 'image' && item.base64Image) {
+//           return <Image key={index} src={item.base64Image} style={styles.image} />;
+//         }
+//         return null;
+//       })}
+//     </Page>
+//   </Document>
+// );
+
+// export default function BlogMain() {
+//   const [blogData, setBlogData] = useState(null);
+//   const location = useLocation();
+//   const { blogData: initialData } = location.state || {};
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       if (initialData) {
+//         const preloadedData = await preloadImages(initialData);  // Preload images
+//         setBlogData(preloadedData);
+//       }
+//     };
+//     fetchData();
+//   }, [initialData]);
+
+//   if (!blogData) {
+//     return <div>Loading...</div>;  // Show loading state until images are preloaded
+//   }
+
+//   return (
+//     <div className="mainBlogdiv">
+//       <div>
+//         <PDFDownloadLink document={<DisplayContent data={blogData} />} filename="BlogPost.pdf">
+//           {({ loading }) => loading ? <button>Loading Document...</button> : <button>Download PDF</button>}
+//         </PDFDownloadLink>
+//         <div className="content" id="content-to-pdf">
+//           {/* Blog content preview can still use HTML */}
+//           {blogData.map((item, index) => item.type === 'image' && <img key={index} src={item.url} alt="" />)}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
 
 import React, { useEffect, useState } from 'react';
-import { PDFDownloadLink, Page, Text, Image, Document, StyleSheet } from "@react-pdf/renderer";
-import GetURL from './GetURL';
+import { PDFDownloadLink, Page, Text, Image, Document, StyleSheet } from '@react-pdf/renderer';
 import { useLocation } from 'react-router-dom';
-// Define styles for react-pdf components
 const styles = StyleSheet.create({
   page: {
     padding: 10,
@@ -318,80 +540,98 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: 200,
     height: 150,
-  }
+  },
 });
 
-const DisplayContent = ({ data }) => {
-  const [updatedData, setUpdatedData] = useState(data);
-
-  // useEffect that maps through the data and replaces the image URLs
-  // useEffect(() => {
-  //   const updateImageURLs = async () => {
-  //     const newData = await Promise.all(
-  //       data.map(async (item) => {
-  //         if (item.type === 'image') {
-  //           const imageUrl = await GetURL(item.url); // Fetch the image URL
-  //           return { ...item, url: imageUrl }; // Return the updated item with the new URL
-  //         }
-  //         return item; // Return the unchanged item
-  //       })
-  //     );
-  //     setUpdatedData(newData); // Update the state with the new data
-  //   };
-
-  //   updateImageURLs();
-  // }, [data]); // Depend on the data array
-
-  return (
-    <Document>
-      <Page style={styles.page}>
-        {data.map((item, index) => {
-          if (item.type === 'PostTitle') {
-            return <Text key={index} style={styles.heading}>{item.text}</Text>;
-          }
-
-          if (item.type === 'heading') {
-            return <Text key={index} style={styles.heading}>{item.text}</Text>;
-          }
-
-          if (item.type === 'subheading') {
-            return <Text key={index} style={styles.subheading}>{item.text}</Text>;
-          }
-
-          if (item.type === 'text') {
-            return <Text key={index} style={styles.text}>{item.text}</Text>;
-          }
-
-          if (item.type === 'code') {
-            return <Text key={index} style={styles.code}>{item.text}</Text>;
-          }
-
-          if (item.type === 'image') {
-            return (
-              <Image key={index} src={item.url} style={styles.image} />
-            );
-          }
-
-          return null; // fallback for undefined types
-        })}
-      </Page>
-    </Document>
-  );
+const getBase64Image = async (url) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to load image: ${response.statusText}`);
+    
+    const blob = await response.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);  // Base64 string
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    console.error(error);
+    return null;  // Return null if fetch failed
+  }
 };
 
+const preloadImages = async (data) => {
+  const updatedData = await Promise.all(
+    data.map(async (item) => {
+      if (item.type === 'image') {
+        const base64Image = await getBase64Image(item.url);
+        if (!base64Image) {
+          console.warn(`Failed to load image at URL: ${item.url}`);
+        }
+        return { ...item, base64Image };
+      }
+      return item;
+    })
+  );
+  return updatedData;
+};
+
+const DisplayContent = ({ data }) => (
+  <Document>
+    <Page style={styles.page}>
+      {data.map((item, index) => {
+        if (item.type === 'heading') {
+          return <Text key={index} style={styles.heading}>{item.text}</Text>;
+        }
+        if (item.type === 'subheading') {
+          return <Text key={index} style={styles.subheading}>{item.text}</Text>;
+        }
+        if (item.type === 'text') {
+          return <Text key={index} style={styles.text}>{item.text}</Text>;
+        }
+        if (item.type === 'code') {
+          return <Text key={index} style={styles.code}>{item.text}</Text>;
+        }
+        if (item.type === 'image' && item.base64Image) {
+          return <Image key={index} src={item.base64Image} style={styles.image} />;
+        }
+        return <Text key={index} style={{ color: 'red' }}>Failed to load image</Text>;  // Fallback if image fails
+      })}
+    </Page>
+  </Document>
+);
+
 export default function BlogMain() {
+  const [blogData, setBlogData] = useState(null);
   const location = useLocation();
-  const { blogData } = location.state || {};
+  const { blogData: initialData } = location.state || {};
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (initialData) {
+        const preloadedData = await preloadImages(initialData);  // Preload images
+        console.log('Preloaded Data:', preloadedData);  // Log the preloaded data to debug
+        setBlogData(preloadedData);
+      }
+    };
+    fetchData();
+  }, [initialData]);
+
+  if (!blogData) {
+    return <div>Loading...</div>;  // Show loading state until images are preloaded
+  }
 
   return (
-    <div className='mainBlogdiv'>
+    <div className="mainBlogdiv">
       <div>
         <PDFDownloadLink document={<DisplayContent data={blogData} />} filename="BlogPost.pdf">
           {({ loading }) => loading ? <button>Loading Document...</button> : <button>Download PDF</button>}
         </PDFDownloadLink>
-        <div className='content' id='content-to-pdf'>
-          {/* Blog content preview can still use HTML here */}
-          <img src={blogData[1].url} alt='' />
+        <div className="content" id="content-to-pdf">
+          {/* Blog content preview */}
+          {blogData.map((item, index) => 
+            item.type === 'image' ? <img key={index} src={item.url} alt="Blog" /> : <div key={index}>{item.text}</div>
+          )}
         </div>
       </div>
     </div>
