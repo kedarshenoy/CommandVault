@@ -510,6 +510,8 @@
 import React, { useEffect, useState } from 'react';
 import { PDFDownloadLink, Page, Text, Image, Document, StyleSheet } from '@react-pdf/renderer';
 import { useLocation } from 'react-router-dom';
+import exportimg from '../../Assets/export.svg'
+import '../../styles/BlogMain.css'
 const styles = StyleSheet.create({
   page: {
     padding: 10,
@@ -543,6 +545,45 @@ const styles = StyleSheet.create({
   },
 });
 
+ const DisplayContentMain = (blogData) => {
+
+    return (
+      <div style={{backgroundColor:'black',paddingLeft:'10%', paddingRight:'10%'}}>
+        <h2 className='postTiltle'>{
+          blogData[0].type=="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
+        {
+          
+       blogData[1].type === 'image' ? <div><img src={blogData[1].url} alt='' /></div> :<div></div>
+       }
+        
+        
+        {blogData.map((item, index) => {
+          if (item.type === 'code') {
+            return <h4 className='postcode' key={index} >{item.text}</h4>;
+          }
+
+          if (item.type === 'heading') {
+            return <h1  className='postHeading' key={index} >{item.text}</h1>;
+          }
+
+          if (item.type === 'subheading') {
+            return <h2 className='postSubhead' key={index} >{item.text}</h2>;
+          }
+
+          if (item.type === 'text') {
+            return <p className='postText' key={index}>{item.text}</p>;
+          }
+
+          if (item.type === 'image' && item.fileName !=='file_1') {
+            return <img key={index} src={item.url} />
+          }
+
+          return null; 
+        })}
+      </div>
+    );
+  };
+
 const getBase64Image = async (url) => {
   try {
     const response = await fetch(url);
@@ -556,7 +597,7 @@ const getBase64Image = async (url) => {
     });
   } catch (error) {
     console.error(error);
-    return null;  // Return null if fetch failed
+    return null;  
   }
 };
 
@@ -609,8 +650,8 @@ export default function BlogMain() {
   useEffect(() => {
     const fetchData = async () => {
       if (initialData) {
-        const preloadedData = await preloadImages(initialData);  // Preload images
-        console.log('Preloaded Data:', preloadedData);  // Log the preloaded data to debug
+        const preloadedData = await preloadImages(initialData);  
+        console.log('Preloaded Data:', preloadedData);  
         setBlogData(preloadedData);
       }
     };
@@ -618,20 +659,22 @@ export default function BlogMain() {
   }, [initialData]);
 
   if (!blogData) {
-    return <div>Loading...</div>;  // Show loading state until images are preloaded
+    return <div>Loading...</div>; 
   }
 
   return (
     <div className="mainBlogdiv">
       <div>
         <PDFDownloadLink document={<DisplayContent data={blogData} />} filename="BlogPost.pdf">
-          {({ loading }) => loading ? <button>Loading Document...</button> : <button>Download PDF</button>}
-        </PDFDownloadLink>
+        <div className='exportlogodiv'>
+        <p className='exportText' >Get a Copy &nbsp;</p> 
+          <img  src={exportimg} className='exportlogo' alt="Export" />
+        </div>
+          </PDFDownloadLink>
         <div className="content" id="content-to-pdf">
-          {/* Blog content preview */}
-          {blogData.map((item, index) => 
-            item.type === 'image' ? <img key={index} src={item.url} alt="Blog" /> : <div key={index}>{item.text}</div>
-          )}
+          {
+            DisplayContentMain(blogData)
+          }
         </div>
       </div>
     </div>
