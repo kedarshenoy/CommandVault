@@ -553,7 +553,7 @@ const styles = StyleSheet.create({
           blogData[0].type=="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
         {
           
-       blogData[1].type === 'image' ? <div><img src={blogData[1].url} alt='' /></div> :<div></div>
+       blogData[1].type === 'image' ? <div><img className='mainBlogImg' src={blogData[1].url} alt='' /></div> :<div><img className='mainBlogImg'  src={require('../../Assets/content.jpeg')} alt=''/></div>
        }
         
         
@@ -575,7 +575,7 @@ const styles = StyleSheet.create({
           }
 
           if (item.type === 'image' && item.fileName !=='file_1') {
-            return <img key={index} src={item.url} />
+            return <div className='postImg'> <img  key={index} src={item.url} /></div>
           }
 
           return null; 

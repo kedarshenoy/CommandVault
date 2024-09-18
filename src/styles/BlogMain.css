@@ -12,7 +12,13 @@ justify-content: center;
 .postTiltle{
     color: silver;
     font-size: 2rem;
-    text-align: left;
+    text-align: center;
+}
+
+.mainBlogImg{
+    height: 50vh;
+    width: 100%;
+    resize: contain;
 }
 
 .mainPostHeading{
@@ -67,4 +73,9 @@ justify-content: center;
 
 .postText{
     color: beige;
+}
+
+.postImg{
+    /* display: flex; */
+
 }

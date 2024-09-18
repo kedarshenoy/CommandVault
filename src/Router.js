@@ -15,13 +15,16 @@ const Router =()=> {
         <Routes>
             <Route path='/'
                       element={
-                        <ProtectedRoute>
+                        
                           <Home />
-                        </ProtectedRoute>
+                        
                       }
             ></Route>
-            <Route path='/post'Component={Takepost} ></Route>
-            <Route path='/profile'Component={Profile} ></Route>
+            <Route path='/post' element={<ProtectedRoute><Takepost/></ProtectedRoute>}></Route>
+            
+            <Route path='/profile' element={<ProtectedRoute><Profile/></ProtectedRoute>} > </Route>
+            
+
             <Route path='/login'Component={Login} ></Route>
             <Route path='/blog'Component={BlogMain} ></Route>
             <Route path='/search' Component={SearchPage}></Route>

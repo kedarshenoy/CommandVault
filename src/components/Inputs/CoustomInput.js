@@ -367,6 +367,10 @@ const addLinkInputBox = () =>
         fetch("http://localhost:5000/upload", {
           method: "POST",
           body: formData,
+          headers: {
+            "authorization": `Bearer ${callapi}`, 
+                
+          }
         })
           .then((response) => response.json())
           .then((data) => {
