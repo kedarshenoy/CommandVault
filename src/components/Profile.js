@@ -69,9 +69,10 @@ const [posts, setPosts] = useState([]);
 
 
   const renderPosts = () => {
-    return posts.map((item, index) => (
-      <div key={index} className="gallery-item" onClick={() => handleNavigation(item)}>
-       { console.log(item)}
+    return posts.map((itemmain, index) => (
+      <div key={index} className="gallery-item" onClick={() => handleNavigation(itemmain.content)}>
+        {/* Access content array within each itemmain */}
+        { console.log(itemmain) }
         <div style={{
           color: 'white',
           textAlign: 'center',
@@ -81,13 +82,13 @@ const [posts, setPosts] = useState([]);
           fontSize: '1.25rem',
           marginBottom: '15px'
         }}>
-          {item[0].text} {/* Adjust based on your data structure */}
+          {itemmain.content[0].text} {/* Access text from the content array */}
         </div>
-        <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} /> {/* Adjust based on your data structure */}
+        <FirebaseImage imagePath={itemmain.content[1].url} imgClass={'gallery-img'} /> {/* Access image URL from the content array */}
       </div>
     ));
   };
-
+  
 
 
   return (

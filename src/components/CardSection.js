@@ -37,8 +37,8 @@ export default function CardSection() {
   // Render posts as gallery items
   const renderPosts = () => {
     return posts.map((item, index) => (
-      <div key={index} className="gallery-item" onClick={() => handleNavigation(item)}>
-       { console.log(item)}
+      <div key={index} className="gallery-item" onClick={() => handleNavigation(item.content)}>
+       {/* { console.log(item)} */}
         <div style={{
           color: 'white',
           textAlign: 'center',
@@ -48,9 +48,9 @@ export default function CardSection() {
           fontSize: '1.25rem',
           marginBottom: '15px'
         }}>
-          {item[0].text} {/* Adjust based on your data structure */}
+          {item.content[0].text} {/* Adjust based on your data structure */}
         </div>
-        <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} /> {/* Adjust based on your data structure */}
+        <FirebaseImage imagePath={item.content[1].url} imgClass={'gallery-img'} /> {/* Adjust based on your data structure */}
       </div>
     ));
   };
