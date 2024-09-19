@@ -507,48 +507,184 @@
 
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { PDFDownloadLink, Page, Text, Image, Document, StyleSheet } from '@react-pdf/renderer';
 import { useLocation } from 'react-router-dom';
 import exportimg from '../../Assets/export.svg'
 import '../../styles/BlogMain.css'
-const styles = StyleSheet.create({
-  page: {
-    padding: 10,
-    backgroundColor: '#ffffff',
-  },
-  heading: {
-    fontSize: 24,
-    marginBottom: 10,
-    color: '#000',
-  },
-  subheading: {
-    fontSize: 18,
-    marginBottom: 10,
-    color: '#555',
-  },
-  text: {
-    fontSize: 12,
-    marginBottom: 5,
-    color: '#000',
-  },
-  code: {
-    fontSize: 12,
-    fontFamily: 'Courier',
-    backgroundColor: '#f5f5f5',
-    padding: 5,
-  },
-  image: {
-    marginVertical: 10,
-    width: 200,
-    height: 150,
-  },
-});
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
- const DisplayContentMain = (blogData) => {
+
+// const styles = StyleSheet.create({
+//   page: {
+//     padding: 10,
+//     backgroundColor: '#ffffff',
+//   },
+//   heading: {
+//     fontSize: 24,
+//     marginBottom: 10,
+//     color: '#000',
+//   },
+//   subheading: {
+//     fontSize: 18,
+//     marginBottom: 10,
+//     color: '#555',
+//   },
+//   text: {
+//     fontSize: 12,
+//     marginBottom: 5,
+//     color: '#000',
+//   },
+//   code: {
+//     fontSize: 12,
+//     fontFamily: 'Courier',
+//     backgroundColor: '#f5f5f5',
+//     padding: 5,
+//   },
+//   image: {
+//     marginVertical: 10,
+//     width: 200,
+//     height: 150,
+//   },
+// });
+
+//  const DisplayContentMain = (blogData) => {
+
+//     return (
+//       <div  ref={pdfRef} style={{backgroundColor:'black',paddingLeft:'10%', paddingRight:'10%'}}>
+//         <h2 className='postTiltle'>{
+//           blogData[0].type=="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
+//         {
+          
+//        blogData[1].type === 'image' ? <div><img className='mainBlogImg' src={blogData[1].url} alt='' /></div> :<div><img className='mainBlogImg'  src={require('../../Assets/content.jpeg')} alt=''/></div>
+//        }
+        
+        
+//         {blogData.map((item, index) => {
+//           if (item.type === 'code') {
+//             return <h4 className='postcode' key={index} >{item.text}</h4>;
+//           }
+
+//           if (item.type === 'heading') {
+//             return <h1  className='postHeading' key={index} >{item.text}</h1>;
+//           }
+
+//           if (item.type === 'subheading') {
+//             return <h2 className='postSubhead' key={index} >{item.text}</h2>;
+//           }
+
+//           if (item.type === 'text') {
+//             return <p className='postText' key={index}>{item.text}</p>;
+//           }
+
+//           if (item.type === 'image' && item.fileName !=='file_1') {
+//             return <div className='postImg'> <img  key={index} src={item.url} /></div>
+//           }
+
+//           return null; 
+//         })}
+//       </div>
+//     );
+//   };
+
+// const getBase64Image = async (url) => {
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) throw new Error(`Failed to load image: ${response.statusText}`);
+    
+//     const blob = await response.blob();
+//     return new Promise((resolve) => {
+//       const reader = new FileReader();
+//       reader.onloadend = () => resolve(reader.result);  // Base64 string
+//       reader.readAsDataURL(blob);
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     return null;  
+//   }
+// };
+
+// const preloadImages = async (data) => {
+//   const updatedData = await Promise.all(
+//     data.map(async (item) => {
+//       if (item.type === 'image') {
+//         const base64Image = await getBase64Image(item.url);
+//         if (!base64Image) {
+//           console.warn(`Failed to load image at URL: ${item.url}`);
+//         }
+//         return { ...item, base64Image };
+//       }
+//       return item;
+//     })
+//   );
+//   return updatedData;
+// };
+
+// const DisplayContent = ({ data }) => (
+//   <Document>
+//     <Page style={styles.page}>
+//       {data.map((item, index) => {
+//         if (item.type === 'heading') {
+//           return <Text key={index} style={styles.heading}>{item.text}</Text>;
+//         }
+//         if (item.type === 'subheading') {
+//           return <Text key={index} style={styles.subheading}>{item.text}</Text>;
+//         }
+//         if (item.type === 'text') {
+//           return <Text key={index} style={styles.text}>{item.text}</Text>;
+//         }
+//         if (item.type === 'code') {
+//           return <Text key={index} style={styles.code}>{item.text}</Text>;
+//         }
+//         if (item.type === 'image' && item.base64Image) {
+//           return <Image key={index} src={item.base64Image} style={styles.image} />;
+//         }
+//         return <Text key={index} style={{ color: 'red' }}>Failed to load image</Text>;  // Fallback if image fails
+//       })}
+//     </Page>
+//   </Document>
+// );
+
+
+// const preloadImages = async (data) => {
+//   const updatedData = await Promise.all(
+//     data.map(async (item) => {
+//       if (item.type === 'image') {
+//         const base64Image = await getBase64Image(item.url);
+//         return { ...item, base64Image };
+//       }
+//       return item;
+//     })
+//   );
+//   return updatedData;
+// };
+
+
+export default function BlogMain() {
+  const [blogData, setBlogData] = useState(null);
+  const location = useLocation();
+  const { blogData: initialData } = location.state || {};
+  const pdfRef = useRef();
+  useEffect(() => {
+    const fetchData = async () => {
+      if (initialData) {
+        // const preloadedData = await preloadImages(initialData);  
+        // console.log('Preloaded Data:', preloadedData);  
+        setBlogData(initialData);
+      }
+    };
+    fetchData();
+  }, [initialData]);
+
+  if (!blogData) {
+    return <div>Loading...</div>; 
+  }
+
+  const DisplayContentMain = (blogData) => {
 
     return (
-      <div style={{backgroundColor:'black',paddingLeft:'10%', paddingRight:'10%'}}>
+      <div  ref={pdfRef} style={{backgroundColor:'black',paddingLeft:'10%', paddingRight:'10%'}}>
         <h2 className='postTiltle'>{
           blogData[0].type=="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
         {
@@ -583,94 +719,46 @@ const styles = StyleSheet.create({
       </div>
     );
   };
-
-const getBase64Image = async (url) => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Failed to load image: ${response.statusText}`);
-    
-    const blob = await response.blob();
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);  // Base64 string
-      reader.readAsDataURL(blob);
+  const downloadPDF = () => {
+    const input = pdfRef.current;
+  
+    if (!input) {
+      console.error('PDF reference is null or undefined.');
+      return;
+    }
+  
+    html2canvas(input).then((canvas) => {
+      console.log('Canvas size:', canvas.width, canvas.height);  // Debugging
+      const imgData = canvas.toDataURL("image/png");
+      console.log('Image data URL:', imgData);  // Debugging
+  
+      const pdf = new jsPDF('p', 'mm', 'a4');  // Changed to 'a4' for standard size
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+  
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+  
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      pdf.save('invoice.pdf');
+    }).catch((error) => {
+      console.error('Error generating PDF:', error);  // Catch and log errors
     });
-  } catch (error) {
-    console.error(error);
-    return null;  
-  }
-};
-
-const preloadImages = async (data) => {
-  const updatedData = await Promise.all(
-    data.map(async (item) => {
-      if (item.type === 'image') {
-        const base64Image = await getBase64Image(item.url);
-        if (!base64Image) {
-          console.warn(`Failed to load image at URL: ${item.url}`);
-        }
-        return { ...item, base64Image };
-      }
-      return item;
-    })
-  );
-  return updatedData;
-};
-
-const DisplayContent = ({ data }) => (
-  <Document>
-    <Page style={styles.page}>
-      {data.map((item, index) => {
-        if (item.type === 'heading') {
-          return <Text key={index} style={styles.heading}>{item.text}</Text>;
-        }
-        if (item.type === 'subheading') {
-          return <Text key={index} style={styles.subheading}>{item.text}</Text>;
-        }
-        if (item.type === 'text') {
-          return <Text key={index} style={styles.text}>{item.text}</Text>;
-        }
-        if (item.type === 'code') {
-          return <Text key={index} style={styles.code}>{item.text}</Text>;
-        }
-        if (item.type === 'image' && item.base64Image) {
-          return <Image key={index} src={item.base64Image} style={styles.image} />;
-        }
-        return <Text key={index} style={{ color: 'red' }}>Failed to load image</Text>;  // Fallback if image fails
-      })}
-    </Page>
-  </Document>
-);
-
-export default function BlogMain() {
-  const [blogData, setBlogData] = useState(null);
-  const location = useLocation();
-  const { blogData: initialData } = location.state || {};
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (initialData) {
-        const preloadedData = await preloadImages(initialData);  
-        console.log('Preloaded Data:', preloadedData);  
-        setBlogData(preloadedData);
-      }
-    };
-    fetchData();
-  }, [initialData]);
-
-  if (!blogData) {
-    return <div>Loading...</div>; 
-  }
+  };
+  
 
   return (
     <div className="mainBlogdiv">
       <div>
-        <PDFDownloadLink document={<DisplayContent data={blogData} />} filename="BlogPost.pdf">
-        <div className='exportlogodiv'>
+     
+        <div className='exportlogodiv' onClick={()=>{downloadPDF()}}>
         <p className='exportText' >Get a Copy &nbsp;</p> 
           <img  src={exportimg} className='exportlogo' alt="Export" />
         </div>
-          </PDFDownloadLink>
+        
         <div className="content" id="content-to-pdf">
           {
             DisplayContentMain(blogData)
