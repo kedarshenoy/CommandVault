@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router-dom';
 import FirebaseImage from './FirebaseImage';
 import axios from 'axios';
 
-
 // const ImageComponent = ({ imagePath }) => {
 //   const [imageURL, setImageURL] = useState("");
 
@@ -106,7 +105,7 @@ const [posts, setPosts] = useState([]);
           <div className='ProfileNameSidediv'>
           <h2 className='ProfileName'>{posts[0]? posts[0].userName : ''}</h2>
           <p className='PostCountName'>Number of Posts:- <span className='PostCount'>{posts.length >0 ? posts.length : 0} </span></p>
-          <p className='Postlogot'>Logout</p>
+          <p className='Postlogot' onClick={()=>{localStorage.removeItem('Token');navigate('/login')}}>Logout</p>
           {/* <p className='PostSendMessage'>Send a Quick Message <img src={messageLogo} style={{height:'1.5rem',marginLeft:'1rem'}} alt=''/></p> */}
           </div>
       </div>

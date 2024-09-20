@@ -38,7 +38,7 @@ export default function Search() {
       )
           .then((res) => {
             setPosts(res.data);
-            console.log(res.data); // Log the posts data
+            // console.log(res.data); // Log the posts data
           })
           .catch((err) => {
             console.log(err); // Log any errors
@@ -69,9 +69,12 @@ export default function Search() {
               fontSize: '1.25rem',
               marginBottom: '15px'
             }}>
-              {item[0].text} 
+              {item.content[0].text} 
             </div>
-            <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} />
+            {
+              item.content[1].type ==='img' ? <img src={item.content[1].url} className='gallery-img' /> : <img src={require('../../Assets/content.jpeg')} className='gallery-img' />
+            }
+            {/* <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} /> */}
           </div>
         ));
       };
