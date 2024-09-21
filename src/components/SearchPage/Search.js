@@ -46,8 +46,8 @@ export default function Search() {
       }
 
 
-      const handleNavigation = (data) => {
-        navigate('/blog', { state: { blogData: data } }); // Navigate with state
+      const handleNavigation = (data,userName) => {
+        navigate('/blog', { state: { blogData: data,userName:userName } }); // Navigate with state
       };
 
       const renderPosts = () => {
@@ -59,7 +59,7 @@ export default function Search() {
             </div>
         }
         return posts.map((item, index) => (
-          <div key={index} className="gallery-item" onClick={() => handleNavigation(item)}>
+          <div key={index} className="gallery-item" onClick={() => handleNavigation(item.content,item.userName)}>
             <div style={{
               color: 'white',
               textAlign: 'center',
@@ -72,7 +72,7 @@ export default function Search() {
               {item.content[0].text} 
             </div>
             {
-              item.content[1].type ==='img' ? <img src={item.content[1].url} className='gallery-img' /> : <img src={require('../../Assets/content.jpeg')} className='gallery-img' />
+              item.content[1].type ==='img' ? <img src={item.content[1].url} className='gallery-img' alt='' /> : <img src={require('../../Assets/content.jpeg')} className='gallery-img' alt='' />
             }
             {/* <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} /> */}
           </div>

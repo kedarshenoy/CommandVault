@@ -30,14 +30,14 @@ export default function CardSection() {
   }, []);
 
   // Handle navigation to the blog page with data
-  const handleNavigation = (data) => {
-    navigate('/blog', { state: { blogData: data } }); // Navigate with state
+  const handleNavigation = (data,userName) => {
+    navigate('/blog', { state: { blogData: data,userName:userName } }); // Navigate with state
   };
 
   // Render posts as gallery items
   const renderPosts = () => {
     return posts.map((item, index) => (
-      <div key={index} className="gallery-item" onClick={() => handleNavigation(item.content)}>
+      <div key={index} className="gallery-item" onClick={() => handleNavigation(item.content,item.userName)}>
        {/* { console.log(item)} */}
         <div style={{
           color: 'white',

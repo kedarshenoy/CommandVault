@@ -663,8 +663,12 @@ import jsPDF from 'jspdf';
 
 export default function BlogMain() {
   const [blogData, setBlogData] = useState(null);
+  const [userName, setuserName] = useState(null);
+
   const location = useLocation();
-  const { blogData: initialData } = location.state || {};
+  const { blogData: initialData } = location.state || {}; 
+  const { userName: initialUser } = location.state || {}; 
+
   const pdfRef = useRef();
   useEffect(() => {
     const fetchData = async () => {
@@ -673,9 +677,14 @@ export default function BlogMain() {
         // console.log('Preloaded Data:', preloadedData);  
         setBlogData(initialData);
       }
+      if(initialUser){
+        setuserName(initialUser)
+      }
     };
     fetchData();
-  }, [initialData]);
+  }, [initialData,initialUser]);
+
+
 
   if (!blogData) {
     return <div>Loading...</div>; 
@@ -686,7 +695,9 @@ export default function BlogMain() {
     return (
       <div  ref={pdfRef} style={{backgroundColor:'black',paddingLeft:'10%', paddingRight:'10%'}}>
         <h2 className='postTiltle'>{
-          blogData[0].type=="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
+          blogData[0].type ==="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
+          
+          <p className='postOwner'>{userName} · Sep-9-2024 · 2 min read</p>
         {
           
        blogData[1].type === 'image' ? <div><img className='mainBlogImg' src={blogData[1].url} alt='' /></div> :<div><img className='mainBlogImg'  src={require('../../Assets/content.jpeg')} alt=''/></div>
@@ -711,7 +722,7 @@ export default function BlogMain() {
           }
 
           if (item.type === 'image' && item.fileName !=='file_1') {
-            return <div className='postImg'> <img  key={index} src={item.url} /></div>
+            return <div className='postImg'> <img  key={index} src={item.url}  alt=''/></div>
           }
 
           return null; 
