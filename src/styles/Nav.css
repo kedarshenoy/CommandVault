@@ -1,4 +1,4 @@
-.inputBoxNav{
+/* .inputBoxNav{
         font-size: 1.15rem;
     background-color: transparent;
     color: blue;
@@ -9,7 +9,6 @@
     align-items: center;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
-    /* width: 50%; */
 }
 
 .inputBoxNav::placeholder{
@@ -25,4 +24,111 @@
 .postNameInput{
     background-color: transparent;
     border-radius: 10px;
-}
+} */
+
+/* General Nav Styling */
+.nav-container {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+  }
+  
+  .logo {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: blue;
+    cursor: pointer;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .nav-links span {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 1.15rem;
+    color: blue;
+    cursor: pointer;
+  }
+  
+  /* Hamburger menu initially hidden */
+  .hamburger {
+    display: none;
+    font-size: 2rem;
+    color: blue;
+    cursor: pointer;
+  }
+  
+  /* Input box styling */
+  .inputBoxNav {
+    font-size: 1.15rem;
+    background-color: transparent;
+    color: blue;
+    border: 0.1px solid blue;
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+  }
+  
+  .inputBoxNav::placeholder {
+    font-size: 1rem;
+    color: blue;
+  }
+  
+  .inputBoxNav:focus {
+    outline: none;
+    border-color: #0044cc;
+  }
+  .searchname{
+    display: none;
+  }
+  /* Media Query for smaller screens */
+  @media (max-width: 768px) {
+    .nav-container {
+      justify-content: space-between;
+    }
+    .inputBoxNav{
+        display: none;
+    }
+  .searchname{
+    display: inline;
+  }
+    .nav-links {
+      position: absolute;
+      top: 70px;
+      right: 0;
+      background-color: black;
+      flex-direction: column;
+      gap: 2;
+      width: 80%; /* Set width to 80% */
+      display: none;
+      padding: 10px 0;
+      margin: 0 auto; /* Center the dropdown */
+      left: 50%;
+      transform: translateX(-50%); /* Ensure it's centered horizontally */
+    }
+  
+    .nav-links.open {
+      display: flex;
+    }
+  
+    .nav-links span {
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px solid blue;
+    }
+  
+    .hamburger {
+      display: block;
+      color: white;
+    }
+  }
+  

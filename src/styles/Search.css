@@ -1,0 +1,53 @@
+.searchHeading{
+    color: silver;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+
+.searchBar{
+    border: 1px solid silver;
+    border-radius: 10px;
+    color: silver;
+    padding:  9px;
+    font-size: 1.25rem;
+
+}
+
+.searchBTn{
+    color: silver;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 1px solid silver;
+    padding: 9px;
+    font-size: 1.25rem;
+    border-radius: 15px;
+}
+
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjust minmax value as needed */
+    gap: 50px; /* Space between images */
+    padding: 50px; /* Padding around the grid */
+  }
+  
+  .gallery-img {
+    width: 100%;
+    height: 20rem; 
+    object-fit: contain;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+
+  .gallery-img:hover{
+    /* border-radius: 20px; */
+    transform: scale(1.01);
+  }
+  
+  @media (max-width: 600px) {
+    .gallery {
+      grid-template-columns: repeat(1, 1fr); /* 1 image per row on small screens */
+    }
+  }
+  

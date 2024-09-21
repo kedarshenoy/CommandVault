@@ -1,0 +1,22 @@
+
+
+.avtimg{
+    height: 20rem;
+    width: 20rem;
+    border-radius: 100%;
+    margin-right: 20px;
+    margin-left:20px;
+    /* object-fit: contain; */
+}
+
+.avtcontainer{
+    display: flex;
+    flex-wrap: wrap;
+
+    
+}
+
+
+.AvatarMAinDIV{
+    text-align: center;
+}

@@ -11,7 +11,7 @@
 firebase.js
 # production
 /build
-
+bfg.jar
 # misc
 .DS_Store
 .env.local

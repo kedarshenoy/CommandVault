@@ -348,7 +348,7 @@ const addLinkInputBox = () =>
       if (bannerImage.files && bannerImage.files.length > 0) {
         // Get the first file from the input
         const banner = bannerImage.files[0];
-        formData.append(`file_${1}`, banner);
+        formData.append(`file_1`, banner);
       }
     
       documentContent.forEach((item, index) => {
@@ -361,19 +361,29 @@ const addLinkInputBox = () =>
         }
       });
       // Example API call
-      fetch("http://localhost:5000/upload", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("API Response:", data);
-          setShowsecond(true);
+      let callapi = localStorage.getItem('Token');
+      (callapi !== 'Guest') ?
+      
+        fetch("http://localhost:5000/upload", {
+          method: "POST",
+          body: formData,
+          headers: {
+            "authorization": `Bearer ${callapi}`, 
+                
+          }
         })
-        .catch((error) => {
-          console.error("Error uploading document:", error);
-        });
-    };
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("API Response:", data);
+            setShowsecond(true);
+          })
+          .catch((error) => {
+            console.error("Error uploading document:", error);
+          })
+          :
+          window.alert('Join the Discussion: Log In to Post')
+      
+      }
   
   return (
     <div style={styles.editorContainer}>
