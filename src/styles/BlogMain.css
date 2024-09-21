@@ -60,6 +60,8 @@ justify-content: center;
 
 .postcode{
     color: gray;
+    background-color: black;
+    border: 1px solid silver;
 }
 
 .postHeading{
