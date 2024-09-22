@@ -1,8 +1,8 @@
 
 
 .avtimg{
-    height: 20rem;
-    width: 20rem;
+    height: 10rem;
+    width: 10rem;
     border-radius: 100%;
     margin-right: 20px;
     margin-left:20px;
@@ -13,10 +13,45 @@
     display: flex;
     flex-wrap: wrap;
 
-    
+}
+.AvtHeading{
+    color: silver;
+    font-size: 2rem;
 }
 
+.avtSendBtnSkip{
+    color: blue;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid blue;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.avtSendBtnDiv{
+    display: flex;
+    justify-content: space-around;
+}
+
+.avtSendBtnComplete{
+
+}
 
 .AvatarMAinDIV{
     text-align: center;
+}
+
+@media (max-width: 600px) {
+    .avtimg{
+        height: 4rem;
+        width: 4rem;
+        margin-bottom: 5px;
+    }
+
+    .avtSendBtnDiv{
+        display: block;
+    }
+
+    .avtSendBtnSkip{
+        margin-bottom: 1rem;
+    }
 }

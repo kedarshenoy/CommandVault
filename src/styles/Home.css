@@ -36,6 +36,10 @@
     padding-left:5vw;
     padding-right:5vw;
   }
+  .homeDivChild{
+    width: 50%;
+  }
+
   
   .joinBtn {
     display: inline-block;
@@ -62,4 +66,35 @@
   .cardSectionHome{
     height: 90vh ;
   }
+  
+
+  .homelottie{
+    height: 50%vh;
+     width: 50%vw;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .homeDiv {
+      flex-direction: column;
+      text-align: center; /* Center-align text for better mobile appearance */
+      padding-left: 2vw;
+      padding-right: 2vw;
+    }
+  
+    .homelottie {
+      height: 40vh; /* Adjust the height for smaller screens */
+      width: 80vw; /* Adjust the width for better mobile view */
+      margin-top: 20px; /* Add some margin to separate it from the text */
+    }
+  
+    .joinBtn {
+      margin-top: 10%; /* Adjust margin for proper spacing */
+    }
+    .homeDivChild{
+      width: 100%;
+      text-align: center;
+    }
+  }
+
   

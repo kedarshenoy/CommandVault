@@ -1,94 +1,4 @@
-/* .toggle-container {
-    display: flex;
-    width: 100px;
-    height: 40px;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 2px solid #ccc;
-    background-color: #f0f0f0;
-    transition: background-color 0.3s ease;
-  }
-  
-  .toggle-option {
-    flex: 1;
-    text-align: center;
-    line-height: 40px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #888;
-    border-radius: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .selected {
-    background-color: #4caf50;
-    color: white;
-  }
-   */
 /* 
-
-   .toggle-container {
-    position: relative;
-    display: flex;
-    width: 100px;
-    height: 40px;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 2px solid #ccc;
-    background-color:transparent;
-  }
-  
-  .toggle-background {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    border-radius: 20px;
-    background-color: rgba(160, 138, 247, 0.5);
-    transition: transform 0.3s ease;
-    transform: translateX(0);
-  }
-  
-  .toggle-option {
-    flex: 1;
-    text-align: center;
-    line-height: 40px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #888;
-    position: relative;
-    z-index: 1;
-
-    transition: color 0.3s ease;
-  }
-  
-  .selected {
-    color: white;
-  }
-  
-  .is-toggled .toggle-background {
-    transform: translateX(100%);
-  }
-  
-
-  .MainLogin{
-    display: flex;
-    justify-content: center;
-  }
-
-  .loginBox{
-    border: 1px solid blue ;
-    padding: 20px;
-  }
-
-  .inputBox{
-    border:none;
-    font-size:1.3rem;
-    overflow-y: hidden;
-  } */
-
-
 
 
   .toggle-container {
@@ -152,7 +62,7 @@
         border-radius: 20px;
         cursor: pointer;
          margin-top:10px;
-         transition: background-color 0.4s ease, color 0.4s ease, transform 0.4s ease; /* Smooth transition */
+         transition: background-color 0.4s ease, color 0.4s ease, transform 0.4s ease;
 }
 
 .loginSubmit:hover{
@@ -184,7 +94,6 @@
 .errorbox{
     color:white;
     display:flex;
-    /* align-items:center; */
     font-size: 1rem;
     background-color: rgb(255, 0, 0, 0.1);
     padding: 10px;
@@ -197,4 +106,175 @@
     height: 1.5rem;
     width: 1.5rem;
     margin-right: 1rem;
+} */
+
+
+
+/* Toggle Button Container */
+.toggle-container {
+  position: relative;
+  display: flex;
+  width: 50vh;
+  height: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgb(204, 204, 204, 0.3);
+  background-color: transparent;
+  margin-bottom: 20px; /* Adds space between toggle and input sections */
+}
+
+.toggle-background {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  border-radius: 20px;
+  background-color: rgba(160, 138, 247, 0.5);
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+}
+
+.toggle-option {
+  flex: 1;
+  text-align: center;
+  line-height: 40px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #888;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.selected {
+  color: white;
+}
+
+.is-toggled .toggle-background {
+  transform: translateX(100%);
+}
+
+/* Main Login Container */
+.MainLogin {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+}
+
+/* Login Box */
+.loginBox {
+  width: fit-content;
+  margin-top: 20px; /* Adds spacing between the toggle and login box */
+}
+
+/* Submit Button Styling */
+.loginSubmit {
+  color: blue;
+  padding: 10px;
+  border: 1px solid blue;
+  display: inline-block;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.4s ease, color 0.4s ease, transform 0.4s ease;
+}
+
+.loginSubmit:hover {
+  background-color: darkblue;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Form Container */
+.form-container {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+  position: relative; /* Changed from absolute to relative */
+  margin-top: 20px;
+  width: 100%; /* Take full width */
+}
+
+.form-container.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Input Box */
+.inputBox {
+  border-bottom: 2px dotted rgb(128, 128, 128, 0.2);
+  font-size: 1.3rem;
+}
+
+/* Error Box */
+.errorbox {
+  color: white;
+  display: flex;
+  font-size: 1rem;
+  background-color: rgb(255, 0, 0, 0.1);
+  padding: 10px;
+  letter-spacing: 0.1rem;
+  border-radius: 20px;
+}
+
+.errorMessageicon {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 1rem;
+}
+
+/* Responsive Styling for Images and Toggle */
+@media screen and (max-width: 768px) {
+  /* Hide images/icons in smaller screens */
+  .image-container {
+      display: none;
+  }
+  .lottie{
+    display: none;
+  }
+
+  .MainLogin {
+      align-items: center; /* Center the login box */
+  }
+
+  .loginBox {
+      width: 90%; /* Adjust width for mobile screens */
+  }
+
+  .toggle-container {
+      width: 100%; /* Full width on smaller screens */
+  }
+
+  .form-container {
+      width: 100%; /* Full width for forms on smaller screens */
+  }
+
+  .inputBox {
+      font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+}
+
+/* Tablet View Adjustments */
+@media screen and (max-width: 1024px) {
+  .MainLogin {
+      align-items: center;
+  }
+
+  .toggle-container {
+      width: 70%; /* Adjust toggle width for tablets */
+  }
+
+  .loginBox {
+      width: 80%; /* Adjust width for tablets */
+  }
+
+  .form-container {
+      width: 80%;
+  }
+
+  .inputBox {
+      font-size: 1.1rem; /* Slightly smaller font for tablet view */
+  }
 }
