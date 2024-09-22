@@ -509,7 +509,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { PDFDownloadLink, Page, Text, Image, Document, StyleSheet } from '@react-pdf/renderer';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import exportimg from '../../Assets/export.svg'
 import '../../styles/BlogMain.css'
 import html2canvas from 'html2canvas';
@@ -664,7 +664,7 @@ import jsPDF from 'jspdf';
 export default function BlogMain() {
   const [blogData, setBlogData] = useState(null);
   const [userName, setuserName] = useState(null);
-
+const navigate= useNavigate();
   const location = useLocation();
   const { blogData: initialData } = location.state || {}; 
   const { userName: initialUser } = location.state || {}; 
@@ -697,7 +697,7 @@ export default function BlogMain() {
         <h2 className='postTiltle'>{
           blogData[0].type ==="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
           
-          <p className='postOwner'>{userName} · Sep-9-2024 · 2 min read</p>
+          <p onClick={()=>{ navigate('/user', { state: { userName } })}} className='postOwner'>{userName} · Sep-9-2024 · 2 min read</p>
         {
           
        blogData[1].type === 'image' ? <div className='mainBlogImgdiv'><img className='mainBlogImg' src={blogData[1].url} alt='' /></div> :<div className='mainBlogImgdiv'><img className='mainBlogImg' style={{width:'100%'}}  src={require('../../Assets/content.jpeg')} alt=''/></div>

@@ -11,15 +11,17 @@ import messageLogo from '../../Assets/Profile/message.svg';
 // import l4 from '../Assets/l4.json';
 // import login from '../Assets/Login.json';
 // import { disablePersistentCacheIndexAutoCreation } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 // import FirebaseImage from './FirebaseImage';
 import axios from 'axios';
-export default function UserProfile({user}) {
+export default function UserProfile() {
+  const location = useLocation();
+  const { userName } = location.state || {};
     const navigate = useNavigate(); // Use 'navigate' instead of 'navigation'
   const [posts, setPosts] = useState([]);
     const getPosts = () => {
       axios.post('http://localhost:5000/post/posts-creator', {
-        creatorName:user
+        creatorName:userName
     },{
         headers: {
           'authorization': `Bearer ${localStorage.getItem('Token')}` }
@@ -34,7 +36,7 @@ export default function UserProfile({user}) {
     };
   
     const handleNavigation = (data) => {
-      navigate('/blog', { state: { blogData: data } }); // Navigate with state
+      navigate('/blog', { state: { blogData: data, userName: userName} }); // Navigate with state
     };
   
     // Fetch posts when the component mounts
@@ -59,7 +61,7 @@ export default function UserProfile({user}) {
           }}>
             {itemmain.content[0].text} {/* Access text from the content array */}
           </div>
-          {/* <FirebaseImage imagePath={itemmain.content[1].url} imgClass={'gallery-img'} /> Access image URL from the content array */}
+          <img  src={itemmain.content[1].url} alt='' className={'gallery-img'} />
         </div>
       ));
     };

@@ -58,7 +58,7 @@ const [posts, setPosts] = useState([]);
   };
 
   const handleNavigation = (data) => {
-    navigate('/blog', { state: { blogData: data } }); // Navigate with state
+    navigate('/blog', { state: { blogData: data, userName:posts[0].userName } }); // Navigate with state
   };
 
   // Fetch posts when the component mounts
