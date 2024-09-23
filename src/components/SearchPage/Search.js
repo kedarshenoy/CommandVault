@@ -73,7 +73,7 @@ export default function Search() {
               {item.content[0].text} 
             </div>
             {
-              item.content[1].type ==='img' ? <img src={item.content[1].url} className='gallery-img' alt='' /> : <img src={require('../../Assets/content.jpeg')} className='gallery-img' alt='' />
+              item.content[1].type ==='image' ? <img src={item.content[1].url} className='gallery-img' alt='' /> : <img src={require('../../Assets/content.jpeg')} className='gallery-img' alt='' />
             }
             {/* <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} /> */}
           </div>

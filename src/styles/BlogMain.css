@@ -3,9 +3,6 @@
     width: 800px;
 }
 
-
-
-
 .mainBlogdiv{
     width: 100%;
 display: flex;
@@ -72,13 +69,13 @@ justify-content: center;
 
 }
 
-
 .postcode{
     color: gray;
     background-color: black;
     border: 1px solid silver;
     font-size: 1.2rem;
     padding: 1rem;
+    border-radius: 10px;
 }
 
 .postHeading{
