@@ -57,8 +57,8 @@ const [posts, setPosts] = useState([]);
       });
   };
 
-  const handleNavigation = (data) => {
-    navigate('/blog', { state: { blogData: data, userName:posts[0].userName } }); // Navigate with state
+  const handleNavigation = (data,formattedTime) => {
+    navigate('/blog', { state: { blogData: data, userName:posts[0].userName, Time:formattedTime } }); // Navigate with state
   };
 
   // Fetch posts when the component mounts
@@ -69,7 +69,7 @@ const [posts, setPosts] = useState([]);
 
   const renderPosts = () => {
     return posts.map((itemmain, index) => (
-      <div key={index} className="gallery-item" onClick={() => handleNavigation(itemmain.content)}>
+      <div key={index} className="gallery-item" onClick={() => handleNavigation(itemmain.content,itemmain.formattedTime)}>
         {/* Access content array within each itemmain */}
         { console.log(itemmain) }
         <div style={{

@@ -108,8 +108,8 @@ export default function CardSection() {
   }, [page]);
 
   // Handle navigation to the blog page with data
-  const handleNavigation = (data, userName) => {
-    navigate('/blog', { state: { blogData: data, userName: userName } });
+  const handleNavigation = (data, userName,formattedTime) => {
+    navigate('/blog', { state: { blogData: data, userName: userName, Time:formattedTime } });
   };
 
   // Load more posts
@@ -123,7 +123,7 @@ export default function CardSection() {
       <div
         key={index}
         className="gallery-item"
-        onClick={() => handleNavigation(item.content, item.userName)}
+        onClick={() => handleNavigation(item.content, item.userName, item.formattedTime)}
       >
         <div
           style={{

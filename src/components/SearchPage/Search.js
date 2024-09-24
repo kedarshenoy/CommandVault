@@ -46,8 +46,8 @@ export default function Search() {
       }
 
 
-      const handleNavigation = (data,userName) => {
-        navigate('/blog', { state: { blogData: data,userName:userName } }); // Navigate with state
+      const handleNavigation = (data,userName,formattedTime) => {
+        navigate('/blog', { state: { blogData: data,userName:userName, Time:formattedTime } }); // Navigate with state
       };
 
       const renderPosts = () => {
@@ -60,7 +60,7 @@ export default function Search() {
         }
         return <div className='gallery'>{
          posts.map((item, index) => (
-          <div key={index} className="gallery-item" onClick={() => handleNavigation(item.content,item.userName)}>
+          <div key={index} className="gallery-item" onClick={() => handleNavigation(item.content,item.userName, item.formattedTime)}>
             <div style={{
               color: 'white',
               textAlign: 'center',

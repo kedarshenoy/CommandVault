@@ -664,10 +664,13 @@ import jsPDF from 'jspdf';
 export default function BlogMain() {
   const [blogData, setBlogData] = useState(null);
   const [userName, setuserName] = useState(null);
-const navigate= useNavigate();
+  const [Time,setTime]= useState(null);
+  const navigate= useNavigate();
   const location = useLocation();
   const { blogData: initialData } = location.state || {}; 
   const { userName: initialUser } = location.state || {}; 
+  const { Time: initialTime } = location.state || {}; 
+
 
   const pdfRef = useRef();
   useEffect(() => {
@@ -680,9 +683,12 @@ const navigate= useNavigate();
       if(initialUser){
         setuserName(initialUser)
       }
+      if(initialTime){
+        setTime(initialTime)
+      }
     };
     fetchData();
-  }, [initialData,initialUser]);
+  }, [initialData,initialUser,initialTime]);
 
 
 
@@ -691,13 +697,13 @@ const navigate= useNavigate();
   }
 
   const DisplayContentMain = (blogData) => {
-
+    console.log(blogData);
     return (
       <div  className='postDisplay' ref={pdfRef} style={{backgroundColor:'black'}}>
         <h2 className='postTiltle'>{
           blogData[0].type ==="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
           
-          <p onClick={()=>{ navigate('/user', { state: { userName } })}} className='postOwner'>{userName} · Sep-9-2024 · 2 min read</p>
+          <p onClick={()=>{ navigate('/user', { state: { userName } })}} className='postOwner'>{userName} · {Time} · 2 min read</p>
         {
           
        blogData[1].type === 'image' ? <div className='mainBlogImgdiv'><img className='mainBlogImg' src={blogData[1].url} alt='' /></div> :<div className='mainBlogImgdiv'><img className='mainBlogImg' style={{width:'100%'}}  src={require('../../Assets/content.jpeg')} alt=''/></div>
