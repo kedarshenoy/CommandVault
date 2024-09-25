@@ -92,7 +92,7 @@ const addLinkInputBox = () =>
           border: "none",
         },
       },
-      "Paste Link",
+      "Add Link",
       "link"
     );
 
@@ -336,6 +336,66 @@ const addLinkInputBox = () =>
     //   return documentContent;
     // };
     
+
+    // const collectDocumentContent = () => {
+    //   const contentDiv = contentEditableRef.current;
+    //   if (!contentDiv) return [];
+      
+    //   const documentContent = [];
+    //   const children = contentDiv.childNodes;
+    
+    //   children.forEach((child) => {
+    //     if (child.nodeType === Node.TEXT_NODE) {
+    //       // Capture plain text nodes
+    //       const text = child.textContent.trim();
+    //       if (text) {
+    //         documentContent.push({
+    //           text: text,
+    //           type: "text",
+    //         });
+    //       }
+    //     } else if (child.nodeType === Node.ELEMENT_NODE) {
+    //       if (child.nodeName === "D") {
+    //         const inputElement = child.querySelector("input[type='text'], input[type='file']");
+    //         if (inputElement) {
+    //           const placeholder = inputElement.getAttribute("placeholder");
+    //           const dataType = child.getAttribute("data-type"); // Get the data-type attribute
+    
+    //           let type = "text";
+    //           // Use the data-type attribute to determine the correct type
+    //           if (dataType === "heading") {
+    //             type = "heading";
+    //           } else if (dataType === "subheading") {
+    //             type = "subheading";
+    //           } else if (dataType === "code") {
+    //             type = "code";
+    //           } else if (dataType === "link") {
+    //             type = "link"; // Ensure 'link' type is captured
+    //           } else if (inputElement.type === "file") {
+    //             const file = inputElement.files[0];
+    //             if (file) {
+    //               documentContent.push({
+    //                 type: "file",
+    //                 file, // Include the file object
+    //                 name: file.name, // File name for reference
+    //               });
+    //             }
+    //             return; // Skip adding text info for the file input
+    //           }
+    
+    //           documentContent.push({
+    //             text: inputElement.value || placeholder,
+    //             type,
+    //           });
+    //         }
+    //       }
+    //     }
+    //   });
+    
+    //   return documentContent;
+    // };
+
+    // just to check the git  
     const handleSave = () => {
       const documentContent = collectDocumentContent();
       
@@ -416,7 +476,7 @@ const addLinkInputBox = () =>
 
             Add Image
           </button>
-          <button className='AddbtnPost' style={styles.button} onClick={addLinkInputBox}>
+          <button className='AddbtnPost' style={styles.button} onClick={ ()=>addLinkInputBox()}>
             <img src={Link} alt='' style={styles.icon} className="iconsAdd"/>
             Add Link
           </button>

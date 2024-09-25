@@ -1,4 +1,8 @@
 /* Gallery.css */
+
+.maincomponent{
+  padding-bottom: 20px;
+}
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjust minmax value as needed */
@@ -17,6 +21,22 @@
   .gallery-img:hover{
     /* border-radius: 20px; */
     transform: scale(1.01);
+  }
+
+  .load-more-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .load-more-btn{
+    width: fit-content;
+    color: blue;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: transparent;
+    border:  1px solid blue;
+    border-radius: 10px;
   }
   
   @media (max-width: 600px) {

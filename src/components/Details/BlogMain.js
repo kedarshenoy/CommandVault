@@ -509,7 +509,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { PDFDownloadLink, Page, Text, Image, Document, StyleSheet } from '@react-pdf/renderer';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import exportimg from '../../Assets/export.svg'
 import '../../styles/BlogMain.css'
 import html2canvas from 'html2canvas';
@@ -664,10 +664,13 @@ import jsPDF from 'jspdf';
 export default function BlogMain() {
   const [blogData, setBlogData] = useState(null);
   const [userName, setuserName] = useState(null);
-
+  const [Time,setTime]= useState(null);
+  const navigate= useNavigate();
   const location = useLocation();
   const { blogData: initialData } = location.state || {}; 
   const { userName: initialUser } = location.state || {}; 
+  const { Time: initialTime } = location.state || {}; 
+
 
   const pdfRef = useRef();
   useEffect(() => {
@@ -680,9 +683,12 @@ export default function BlogMain() {
       if(initialUser){
         setuserName(initialUser)
       }
+      if(initialTime){
+        setTime(initialTime)
+      }
     };
     fetchData();
-  }, [initialData,initialUser]);
+  }, [initialData,initialUser,initialTime]);
 
 
 
@@ -691,16 +697,16 @@ export default function BlogMain() {
   }
 
   const DisplayContentMain = (blogData) => {
-
+    console.log(blogData);
     return (
-      <div  ref={pdfRef} style={{backgroundColor:'black',paddingLeft:'10%', paddingRight:'10%'}}>
+      <div  className='postDisplay' ref={pdfRef} style={{backgroundColor:'black'}}>
         <h2 className='postTiltle'>{
           blogData[0].type ==="PostTitle" ? blogData[0].text : 'New Blog'  }</h2>
           
-          <p className='postOwner'>{userName} · Sep-9-2024 · 2 min read</p>
+          <p onClick={()=>{ navigate('/user', { state: { userName } })}} className='postOwner'>{userName} · {Time} · 2 min read</p>
         {
           
-       blogData[1].type === 'image' ? <div><img className='mainBlogImg' src={blogData[1].url} alt='' /></div> :<div><img className='mainBlogImg'  src={require('../../Assets/content.jpeg')} alt=''/></div>
+       blogData[1].type === 'image' ? <div className='mainBlogImgdiv'><img className='mainBlogImg' src={blogData[1].url} alt='' /></div> :<div className='mainBlogImgdiv'><img className='mainBlogImg' style={{width:'100%'}}  src={require('../../Assets/content.jpeg')} alt=''/></div>
        }
         
         
@@ -721,8 +727,12 @@ export default function BlogMain() {
             return <p className='postText' key={index}>{item.text}</p>;
           }
 
+          if (item.type === 'link') {
+            return <a href={item.text} target='blank' className='postLink' key={index}>{item.text}</a>;
+          }
+
           if (item.type === 'image' && item.fileName !=='file_1') {
-            return <div className='postImg'> <img  key={index} src={item.url}  alt=''/></div>
+            return <img className='postImg' key={index} src={item.url}  alt=''/>
           }
 
           return null; 

@@ -3,8 +3,8 @@
     width: 800px;
 }
 
-
 .mainBlogdiv{
+    width: 100%;
 display: flex;
 justify-content: center;
 }
@@ -15,10 +15,23 @@ justify-content: center;
     text-align: center;
 }
 
+.postLink{
+    text-decoration: none;
+    color: #0000ff;
+    font-size: 1rem;
+}
+
 .mainBlogImg{
-    height: 50vh;
-    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    max-width: 100%;
     resize: contain;
+    
+}
+
+.mainBlogImgdiv{
+    width: 100%;
+    display: flex;
 }
 
 .mainPostHeading{
@@ -32,7 +45,6 @@ justify-content: center;
     width: 70vw;
     color: blue;
     font-size: 1rem;
-    text-align: justify;
 }
 
 .exportlogo{
@@ -57,11 +69,13 @@ justify-content: center;
 
 }
 
-
 .postcode{
     color: gray;
     background-color: black;
     border: 1px solid silver;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 .postHeading{
@@ -75,14 +89,87 @@ justify-content: center;
 
 .postText{
     color: beige;
+    text-align: justify;
+
 }
 
 .postImg{
     /* display: flex; */
-
+    height: auto;
+    max-width:100%;
+    resize: contain;
 }
 
 .postOwner{
+    cursor: pointer;
     color: silver;
     font-size: 1rem;
+}
+
+
+
+@media (max-width: 600px) {
+    .blogmainimg{
+        /* height: 500px; */
+        /* width: 95%;
+        height: auto; */
+    }
+
+    .mainBlogImg{
+        max-height:50%vh;
+        height: auto;
+        width: 100%vw;
+        resize: contain;
+        /* display: none; */
+    }
+
+    .content{
+        width: 100%;
+
+    }
+
+    .exportlogodiv{
+        padding-right: 5%;
+    }
+
+    .postTiltle{
+        font-size: 1.4rem;
+    }
+
+    .postcode{
+        font-size: 1rem;
+        padding: 0.2rem;
+    }
+    .postHeading{
+        font-size: 1.3rem;
+        line-height: normal;
+        margin: 0;
+        margin-bottom: 0.4rem;
+        padding: 0;
+    }
+    .postSubhead{
+        font-size: 1.2rem;
+        margin: 0;
+        padding: 0;
+    }
+    .postText{
+        font-size: 1rem;
+    }
+
+    .postLink{
+        font-size: 1rem;
+
+    }
+
+    .postDisplay{
+        padding-left:5%;
+        padding-Right:5%;
+    }
+    .postImg{
+        /* display: none; */
+        max-height:10rem;
+        max-width:100%;
+        resize: contain;
+
+    }
 }

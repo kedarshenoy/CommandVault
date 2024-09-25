@@ -7,7 +7,8 @@ import Login from './components/Login/Login';
 import BlogMain from './components/Details/BlogMain';
 import ProtectedRoute from './components/ProtectedRoute';
 import SearchPage from './components/SearchPage/Search';
-import Avatar from './components/Login/Avatar';
+import UserProfile from './components/SearchPage/UserProfile';
+// import Avatar from './components/Login/Avatar';
 const Router =()=> {
     return (
         <>
@@ -29,7 +30,8 @@ const Router =()=> {
             <Route path='/login'Component={Login} ></Route>
             <Route path='/blog'Component={BlogMain} ></Route>
             <Route path='/search' Component={SearchPage}></Route>
-            <Route path='/avatar' Component={Avatar}></Route>
+            
+            <Route path='/user' Component={UserProfile}></Route>
             
 
             

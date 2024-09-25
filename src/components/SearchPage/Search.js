@@ -14,7 +14,7 @@ export default function Search() {
     const [querry,setQuerry] =useState([]);
     const getPosts = () => {
 
-        axios.get('http://localhost:5000/post/all',{
+        axios.get('http://localhost:5000/post/search',{
           headers: {
             'authorization': `Bearer ${localStorage.getItem('Token')}` }
         })
@@ -46,20 +46,21 @@ export default function Search() {
       }
 
 
-      const handleNavigation = (data,userName) => {
-        navigate('/blog', { state: { blogData: data,userName:userName } }); // Navigate with state
+      const handleNavigation = (data,userName,formattedTime) => {
+        navigate('/blog', { state: { blogData: data,userName:userName, Time:formattedTime } }); // Navigate with state
       };
 
       const renderPosts = () => {
         if(posts.length === 0){
           // return  <Lottie  animationData={l1} loop={true} style={{ height: '200px', width: '200px' }} />
         
-          return  <div style={{textAlign:'center'}}>
+          return  <div style={{display:'flex', width:'100%', justifyContent:'center'}}>
             <Lottie  animationData={notFound} loop={true} style={{ height: '500px', width: '500px' }} />
             </div>
         }
-        return posts.map((item, index) => (
-          <div key={index} className="gallery-item" onClick={() => handleNavigation(item.content,item.userName)}>
+        return <div className='gallery'>{
+         posts.map((item, index) => (
+          <div key={index} className="gallery-item" onClick={() => handleNavigation(item.content,item.userName, item.formattedTime)}>
             <div style={{
               color: 'white',
               textAlign: 'center',
@@ -72,11 +73,12 @@ export default function Search() {
               {item.content[0].text} 
             </div>
             {
-              item.content[1].type ==='img' ? <img src={item.content[1].url} className='gallery-img' alt='' /> : <img src={require('../../Assets/content.jpeg')} className='gallery-img' alt='' />
+              item.content[1].type ==='image' ? <img src={item.content[1].url} className='gallery-img' alt='' /> : <img src={require('../../Assets/content.jpeg')} className='gallery-img' alt='' />
             }
             {/* <FirebaseImage imagePath={item[1].url} imgClass={'gallery-img'} /> */}
           </div>
-        ));
+        )) }
+        </div>
       };
     
 
@@ -93,9 +95,8 @@ export default function Search() {
             </div>
 
 
-            <div className='gallery'>
+            
             {renderPosts()}
-            </div>
         </div>
     )
 }
